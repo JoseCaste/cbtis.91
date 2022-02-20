@@ -7,35 +7,42 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import com.cbtis91.controller.SolicitudIngresoController;
+
 import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
 
-public class RegisterSolicitudIngreso extends JFrame implements ItemListener {
+public class RegisterSolicitudIngreso extends JFrame{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField txtNames;
-	private JTextField txtLastaName;
-	private JTextField txtSecondLastName;
-	private JTextField txtAge;
-	private JTextField txtCurp;
-	private JTextField txtAddress;
-	private JTextField txtEmail;
-	private JTextField txtContact;
-	private JTextField txtBirthLocation;
+	public JTextField txtNames;
+	public JTextField txtLastaName;
+	public JTextField txtSecondLastName;
+	public JTextField txtAge;
+	public JTextField txtCurp;
+	public JTextField txtAddress;
+	public JTextField txtEmail;
+	public JTextField txtContact;
+	public JTextField txtBirthLocation;
+	public JComboBox comboSchoolType;
+	public JComboBox comboDetailsDisability;
+	public JComboBox comboDiscapacidad;
+	public JComboBox comboSpecialty2;
+	public JComboBox comboSpecialty;
+	public JComboBox comboLanguaje;
+	public JComboBox comboDetails;
 
 	/**
 	 * Launch the application.
@@ -192,7 +199,7 @@ public class RegisterSolicitudIngreso extends JFrame implements ItemListener {
 		lblEspecfique.setBounds(12, 72, 114, 23);
 		panel_1.add(lblEspecfique);
 
-		JComboBox comboDetails = new JComboBox(); //TODO cargar datos desde base de datos 
+		comboDetails = new JComboBox(); //TODO cargar datos desde base de datos 
 		comboDetails.setEnabled(false);
 		comboDetails.setBounds(293, 72, 149, 23);
 		panel_1.add(comboDetails);
@@ -201,7 +208,7 @@ public class RegisterSolicitudIngreso extends JFrame implements ItemListener {
 		lblLanguaje.setBounds(12, 18, 235, 23);
 		panel_1.add(lblLanguaje);
 
-		JComboBox comboLanguaje = new JComboBox();
+		comboLanguaje = new JComboBox();
 		comboLanguaje.setBounds(293, 12, 149, 23);
 		panel_1.add(comboLanguaje);
 		comboLanguaje.setModel(new DefaultComboBoxModel(new String[] { "Ninguno", "Si", "No" }));
@@ -243,7 +250,7 @@ public class RegisterSolicitudIngreso extends JFrame implements ItemListener {
 		lblOpcinDe.setBounds(12, 414, 194, 15);
 		panel.add(lblOpcinDe);
 
-		JComboBox comboSpecialty = new JComboBox();
+		comboSpecialty = new JComboBox();
 		comboSpecialty.setBounds(225, 409, 175, 20);
 		panel.add(comboSpecialty);
 
@@ -256,7 +263,7 @@ public class RegisterSolicitudIngreso extends JFrame implements ItemListener {
 		lblOpcinDe_2.setBounds(12, 473, 194, 15);
 		panel.add(lblOpcinDe_2);
 
-		JComboBox comboSpecialty2 = new JComboBox(); // TODO traer datos de base de datos
+		comboSpecialty2 = new JComboBox(); // TODO traer datos de base de datos
 		comboSpecialty2.setBounds(225, 468, 175, 20);
 		panel.add(comboSpecialty2);
 
@@ -286,7 +293,7 @@ public class RegisterSolicitudIngreso extends JFrame implements ItemListener {
 		lblpresentaAlgunaDiscapacidad.setBounds(12, 30, 245, 15);
 		panel_2.add(lblpresentaAlgunaDiscapacidad);
 		
-		JComboBox comboDiscapacidad = new JComboBox();
+		comboDiscapacidad = new JComboBox();
 		comboDiscapacidad.setModel(new DefaultComboBoxModel(new String[] {"Ninguno","Si","No"}));
 		comboDiscapacidad.setBounds(296, 25, 146, 24);
 		panel_2.add(comboDiscapacidad);
@@ -302,7 +309,7 @@ public class RegisterSolicitudIngreso extends JFrame implements ItemListener {
 		lblEspecfiqueDisability.setBounds(12, 79, 114, 23);
 		panel_2.add(lblEspecfiqueDisability);
 		
-		JComboBox comboDetailsDisability = new JComboBox();
+		comboDetailsDisability = new JComboBox();
 		comboDetailsDisability.setEnabled(false);
 		comboDetailsDisability.setBounds(293, 79, 149, 23);
 		panel_2.add(comboDetailsDisability);
@@ -311,7 +318,7 @@ public class RegisterSolicitudIngreso extends JFrame implements ItemListener {
 		lblTipoDeSecundaria.setBounds(486, 414, 159, 15);
 		panel.add(lblTipoDeSecundaria);
 		
-		JComboBox comboSchoolType = new JComboBox();
+		comboSchoolType = new JComboBox();
 		comboSchoolType.setModel(new DefaultComboBoxModel(new String[] {"Técnica","General","Telesecundaria"}));
 		comboSchoolType.setBounds(781, 409, 159, 23);
 		panel.add(comboSchoolType);
@@ -335,12 +342,7 @@ public class RegisterSolicitudIngreso extends JFrame implements ItemListener {
 
 			}
 		});
-		
-	}
-
-	@Override
-	public void itemStateChanged(ItemEvent e) {
-		System.out.println(e.getItemSelectable().toString());
-
+		@SuppressWarnings("unused")
+		SolicitudIngresoController controller= new SolicitudIngresoController(this);
 	}
 }
