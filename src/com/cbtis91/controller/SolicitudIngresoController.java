@@ -2,9 +2,15 @@ package com.cbtis91.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.stream.Collectors;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import com.cbtis91.dao.DAODiscapacidad;
 import com.cbtis91.dao.DAOLengua;
@@ -17,14 +23,75 @@ public class SolicitudIngresoController implements ActionListener{
 	private RegisterSolicitudIngreso registerSolicitudIngreso;
 	private DAOLengua daoLengua;
 	private DAODiscapacidad daoDiscapacidad;
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public SolicitudIngresoController(RegisterSolicitudIngreso registerSolicitudIngreso) {
 		this.daoLengua= new DAOLengua();
 		this.daoDiscapacidad= new DAODiscapacidad();
 		this.registerSolicitudIngreso = registerSolicitudIngreso;
 		loadComboBoxesResources();
+		loadListerners();
 	}
 
 
+	private void loadListerners() {
+		this.registerSolicitudIngreso.btnRegister.addActionListener(this);
+		onlyNumbersTextField();
+	}
+
+
+	private void onlyNumbersTextField() {
+		this.registerSolicitudIngreso.txtAge.addKeyListener(new KeyAdapter() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				//super.keyTyped(e);
+				try {
+					Integer.parseInt(String.format("%c", e.getKeyChar())); //solo es para detectar si hay un valor no numérico, en caso de que si, la tecla presionada no es mostrada en el campo
+				} catch (NumberFormatException ex2) {
+					e.setKeyChar('\0');
+				}
+			}
+			
+		});
+		validateContactField();
+		
+	}
+
+
+	private void validateContactField() {
+		this.registerSolicitudIngreso.txtContact.addKeyListener(new KeyAdapter() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				try {
+					Integer.parseInt(String.format("%c", e.getKeyChar())); //solo es para detectar si hay un valor no numérico, en caso de que si, la tecla presionada no es mostrada en el campo
+				} catch (NumberFormatException ex2) {
+					e.setKeyChar('\0');
+				}
+			}
+		
+		});
+		//cuando el foco sale, verificar si es una extensión de 10 digitos el numero de telefono
+		this.registerSolicitudIngreso.txtContact.addFocusListener(new FocusAdapter() {
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				JTextField field=(JTextField) e.getSource();
+				if(field.getText().length()!=10) {
+					JOptionPane.showMessageDialog(null, "El número de contacto debe ser 10 dígitos");
+					field.requestFocus();
+				}
+			}
+		
+		});
+	}
+
+
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	@SuppressWarnings("unchecked")
 	private void loadComboBoxesResources() {
 		//obtiene los lenguajes, los mapea a unicamente los nombres para obtener un arreglo definido de lengujas para el comboBox
@@ -39,9 +106,16 @@ public class SolicitudIngresoController implements ActionListener{
 	}
 
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource() == this.registerSolicitudIngreso.btnRegister) {
+			if(JOptionPane.showConfirmDialog(null, "Confirmación de generación de ficha")==0) {
+				
+			}
+		}
 		
 	}
 
