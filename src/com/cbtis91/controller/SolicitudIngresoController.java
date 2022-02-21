@@ -2,14 +2,12 @@ package com.cbtis91.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.swing.DefaultComboBoxModel;
 
 import com.cbtis91.dao.DAODiscapacidad;
 import com.cbtis91.dao.DAOLengua;
-import com.cbtis91.databases_items.ConnectionDB;
 import com.cbtis91.models.Discapacidad;
 import com.cbtis91.models.Lengua;
 import com.cbtis91.views.RegisterSolicitudIngreso;
@@ -27,6 +25,7 @@ public class SolicitudIngresoController implements ActionListener{
 	}
 
 
+	@SuppressWarnings("unchecked")
 	private void loadComboBoxesResources() {
 		//obtiene los lenguajes, los mapea a unicamente los nombres para obtener un arreglo definido de lengujas para el comboBox
 		String[] languajes=daoLengua.getAll().stream().map(Lengua::getNombreLengua).collect(Collectors.toList()).stream().toArray(String[]::new);
