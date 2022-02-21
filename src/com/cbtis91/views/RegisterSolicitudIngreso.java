@@ -20,6 +20,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
 
+@SuppressWarnings("rawtypes")
 public class RegisterSolicitudIngreso extends JFrame{
 
 	/**
@@ -63,7 +64,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 	/**
 	 * Create the frame.
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "unchecked" })
 	public RegisterSolicitudIngreso() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1015, 771);
