@@ -1,11 +1,33 @@
 package com.cbtis91.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import com.cbtis91.databases_items.ConnectionDB;
 import com.cbtis91.interfaces.IDAOcrud;
 import com.cbtis91.models.Especialidad;
 
 public class DAOEspecialidad implements IDAOcrud<Especialidad> {
+
+	private ConnectionDB connectionDB;
+	private Statement statement;
+	private ResultSet resultSet;
+	private static final Logger logger= Logger.getLogger(DAOEspecialidad.class.getName());
+	
+	public DAOEspecialidad() {
+		this.connectionDB=ConnectionDB.getInstance();
+		try {
+			this.statement= this.connectionDB.getCon().createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			logger.log(Level.WARNING, "Error en crear la intancia Statament en DAOEspecialidad {0}", e);
+		}
+	}
 
 	@Override
 	public boolean save(Especialidad data) {
@@ -15,8 +37,18 @@ public class DAOEspecialidad implements IDAOcrud<Especialidad> {
 
 	@Override
 	public List<Especialidad> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Especialidad> especialidades= new ArrayList<>();
+		try {
+			this.resultSet= this.statement.executeQuery("Select * from especialidad d");
+			while(this.resultSet.next()) {
+				especialidades.add(new Especialidad(this.resultSet.getInt("id_especialidad"), this.resultSet.getString("nombre_especialidad")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			logger.log(Level.WARNING, "Error al recuperar datos de la tabla especialidad {0}", e);
+			
+		}
+		return especialidades;
 	}
 
 	@Override
