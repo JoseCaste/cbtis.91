@@ -45,6 +45,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 	public JComboBox comboSpecialty;
 	public JComboBox comboLanguaje;
 	public JComboBox comboDetails;
+	public JButton btnRegister;
 
 	/**
 	 * Launch the application.
@@ -330,7 +331,9 @@ public class RegisterSolicitudIngreso extends JFrame{
 		lblrequerido_1_2_1_1.setBounds(781, 441, 149, 15);
 		panel.add(lblrequerido_1_2_1_1);
 		
-		JButton btnRegister = new JButton("Registrar");
+		btnRegister = new JButton("Registrar");
+		btnRegister.setForeground(Color.WHITE);
+		btnRegister.setBackground(new Color(0, 0, 153));
 		btnRegister.setBounds(404, 640, 152, 36);
 		panel.add(btnRegister);
 
