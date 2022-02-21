@@ -13,8 +13,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.cbtis91.dao.DAODiscapacidad;
+import com.cbtis91.dao.DAOEspecialidad;
 import com.cbtis91.dao.DAOLengua;
 import com.cbtis91.models.Discapacidad;
+import com.cbtis91.models.Especialidad;
 import com.cbtis91.models.Lengua;
 import com.cbtis91.views.RegisterSolicitudIngreso;
 
@@ -23,12 +25,14 @@ public class SolicitudIngresoController implements ActionListener{
 	private RegisterSolicitudIngreso registerSolicitudIngreso;
 	private DAOLengua daoLengua;
 	private DAODiscapacidad daoDiscapacidad;
+	private DAOEspecialidad daoEspecialidad;
 	/**
 	 * @wbp.parser.entryPoint
 	 */
 	public SolicitudIngresoController(RegisterSolicitudIngreso registerSolicitudIngreso) {
 		this.daoLengua= new DAOLengua();
 		this.daoDiscapacidad= new DAODiscapacidad();
+		this.daoEspecialidad= new DAOEspecialidad();
 		this.registerSolicitudIngreso = registerSolicitudIngreso;
 		loadComboBoxesResources();
 		loadListerners();
@@ -103,6 +107,9 @@ public class SolicitudIngresoController implements ActionListener{
 		
 		this.registerSolicitudIngreso.comboDetailsDisability.setModel(new DefaultComboBoxModel<>(discapacidades));
 		
+		String[] specialties =daoEspecialidad.getAll().stream().map(Especialidad::getName_especialidad).collect(Collectors.toList()).stream().toArray(String[]::new);
+		this.registerSolicitudIngreso.comboSpecialty.setModel(new DefaultComboBoxModel<>(specialties));
+		this.registerSolicitudIngreso.comboSpecialty2.setModel(new DefaultComboBoxModel<>(specialties));
 	}
 
 
