@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
+import javax.swing.JButton;
 
 @SuppressWarnings("rawtypes")
 public class RegisterSolicitudIngreso extends JFrame{
@@ -83,87 +84,87 @@ public class RegisterSolicitudIngreso extends JFrame{
 		panel.setLayout(null);
 
 		JLabel lblNombres = new JLabel("Nombres");
-		lblNombres.setBounds(12, 24, 148, 23);
+		lblNombres.setBounds(12, 33, 148, 23);
 		panel.add(lblNombres);
 
 		txtNames = new JTextField();
-		txtNames.setBounds(225, 26, 175, 19);
+		txtNames.setBounds(225, 35, 175, 19);
 		panel.add(txtNames);
 		txtNames.setColumns(10);
 
 		JLabel lblApellidoPaterno = new JLabel("Apellido paterno");
-		lblApellidoPaterno.setBounds(12, 72, 148, 23);
+		lblApellidoPaterno.setBounds(12, 97, 148, 23);
 		panel.add(lblApellidoPaterno);
 
 		txtLastaName = new JTextField();
-		txtLastaName.setBounds(225, 74, 175, 19);
+		txtLastaName.setBounds(225, 99, 175, 19);
 		panel.add(txtLastaName);
 		txtLastaName.setColumns(10);
 
 		JLabel lblApellidoMaterno = new JLabel("Apellido materno");
-		lblApellidoMaterno.setBounds(12, 130, 148, 15);
+		lblApellidoMaterno.setBounds(12, 156, 148, 15);
 		panel.add(lblApellidoMaterno);
 
 		txtSecondLastName = new JTextField();
-		txtSecondLastName.setBounds(225, 128, 175, 19);
+		txtSecondLastName.setBounds(225, 154, 175, 19);
 		panel.add(txtSecondLastName);
 		txtSecondLastName.setColumns(10);
 
 		JLabel lblEdad = new JLabel("Edad");
-		lblEdad.setBounds(12, 184, 148, 19);
+		lblEdad.setBounds(12, 216, 148, 19);
 		panel.add(lblEdad);
 
 		txtAge = new JTextField();
-		txtAge.setBounds(225, 184, 175, 19);
+		txtAge.setBounds(225, 216, 175, 19);
 		panel.add(txtAge);
 		txtAge.setColumns(10);
 
 		JLabel lblCurp = new JLabel("Curp");
-		lblCurp.setBounds(12, 245, 70, 15);
+		lblCurp.setBounds(12, 289, 70, 15);
 		panel.add(lblCurp);
 
 		txtCurp = new JTextField();
-		txtCurp.setBounds(225, 243, 175, 19);
+		txtCurp.setBounds(225, 287, 175, 19);
 		panel.add(txtCurp);
 		txtCurp.setColumns(10);
 
 		JLabel lblDireccin = new JLabel("Dirección");
-		lblDireccin.setBounds(12, 296, 107, 15);
+		lblDireccin.setBounds(12, 356, 107, 15);
 		panel.add(lblDireccin);
 
 		txtAddress = new JTextField();
-		txtAddress.setBounds(225, 294, 175, 19);
+		txtAddress.setBounds(225, 354, 175, 19);
 		panel.add(txtAddress);
 		txtAddress.setColumns(10);
 
 		JLabel lblrequerido = new JLabel("*Requerido");
 		lblrequerido.setForeground(Color.RED);
-		lblrequerido.setBounds(225, 47, 175, 15);
+		lblrequerido.setBounds(225, 56, 175, 15);
 		panel.add(lblrequerido);
 
 		JLabel lblrequerido_1 = new JLabel("*Requerido");
 		lblrequerido_1.setForeground(Color.RED);
-		lblrequerido_1.setBounds(225, 105, 175, 15);
+		lblrequerido_1.setBounds(225, 130, 175, 15);
 		panel.add(lblrequerido_1);
 
 		JLabel lblrequerido_2 = new JLabel("*Requerido");
 		lblrequerido_2.setForeground(Color.RED);
-		lblrequerido_2.setBounds(225, 157, 175, 15);
+		lblrequerido_2.setBounds(225, 183, 175, 15);
 		panel.add(lblrequerido_2);
 
 		JLabel lblrequerido_3 = new JLabel("*Requerido");
 		lblrequerido_3.setForeground(Color.RED);
-		lblrequerido_3.setBounds(225, 215, 175, 15);
+		lblrequerido_3.setBounds(225, 247, 175, 15);
 		panel.add(lblrequerido_3);
 
 		JLabel lblrequerido_4 = new JLabel("*Requerido");
 		lblrequerido_4.setForeground(Color.RED);
-		lblrequerido_4.setBounds(225, 267, 175, 15);
+		lblrequerido_4.setBounds(225, 311, 175, 15);
 		panel.add(lblrequerido_4);
 
 		JLabel lblrequerido_5 = new JLabel("*Requerido");
 		lblrequerido_5.setForeground(Color.RED);
-		lblrequerido_5.setBounds(225, 322, 175, 15);
+		lblrequerido_5.setBounds(225, 382, 175, 15);
 		panel.add(lblrequerido_5);
 
 		JLabel lblCorreoElectrnico = new JLabel("Correo electrónico");
@@ -234,43 +235,43 @@ public class RegisterSolicitudIngreso extends JFrame{
 		lblrequerido_1_2.setForeground(Color.RED);
 
 		JLabel lblLugarDeNacimiento = new JLabel("Lugar de nacimiento");
-		lblLugarDeNacimiento.setBounds(12, 353, 159, 15);
+		lblLugarDeNacimiento.setBounds(12, 423, 159, 15);
 		panel.add(lblLugarDeNacimiento);
 
 		txtBirthLocation = new JTextField();
-		txtBirthLocation.setBounds(225, 351, 175, 19);
+		txtBirthLocation.setBounds(225, 421, 175, 19);
 		panel.add(txtBirthLocation);
 		txtBirthLocation.setColumns(10);
 
 		JLabel lblrequerido_5_1 = new JLabel("*Requerido");
 		lblrequerido_5_1.setForeground(Color.RED);
-		lblrequerido_5_1.setBounds(225, 382, 175, 15);
+		lblrequerido_5_1.setBounds(225, 452, 175, 15);
 		panel.add(lblrequerido_5_1);
 
 		JLabel lblOpcinDe = new JLabel("Opción 1 de especialidad");
-		lblOpcinDe.setBounds(12, 414, 194, 15);
+		lblOpcinDe.setBounds(12, 500, 194, 15);
 		panel.add(lblOpcinDe);
 
 		comboSpecialty = new JComboBox();
-		comboSpecialty.setBounds(225, 409, 175, 20);
+		comboSpecialty.setBounds(225, 495, 175, 20);
 		panel.add(comboSpecialty);
 
 		JLabel lblrequerido_5_1_1 = new JLabel("*Requerido");
 		lblrequerido_5_1_1.setForeground(Color.RED);
-		lblrequerido_5_1_1.setBounds(225, 441, 175, 15);
+		lblrequerido_5_1_1.setBounds(225, 527, 175, 15);
 		panel.add(lblrequerido_5_1_1);
 
 		JLabel lblOpcinDe_2 = new JLabel("Opción 2 de especialidad");
-		lblOpcinDe_2.setBounds(12, 473, 194, 15);
+		lblOpcinDe_2.setBounds(12, 566, 194, 15);
 		panel.add(lblOpcinDe_2);
 
 		comboSpecialty2 = new JComboBox(); // TODO traer datos de base de datos
-		comboSpecialty2.setBounds(225, 468, 175, 20);
+		comboSpecialty2.setBounds(225, 561, 175, 20);
 		panel.add(comboSpecialty2);
 
 		JLabel lblrequerido_5_1_1_1 = new JLabel("*Requerido");
 		lblrequerido_5_1_1_1.setForeground(Color.RED);
-		lblrequerido_5_1_1_1.setBounds(225, 500, 175, 15);
+		lblrequerido_5_1_1_1.setBounds(225, 593, 175, 15);
 		panel.add(lblrequerido_5_1_1_1);
 
 		JLabel lblNota = new JLabel("Nota");
@@ -328,6 +329,10 @@ public class RegisterSolicitudIngreso extends JFrame{
 		lblrequerido_1_2_1_1.setForeground(Color.RED);
 		lblrequerido_1_2_1_1.setBounds(781, 441, 149, 15);
 		panel.add(lblrequerido_1_2_1_1);
+		
+		JButton btnRegister = new JButton("Registrar");
+		btnRegister.setBounds(404, 640, 152, 36);
+		panel.add(btnRegister);
 
 		comboDiscapacidad.addActionListener(new ActionListener() {
 
