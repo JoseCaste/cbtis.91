@@ -7,46 +7,46 @@ import lombok.Data;
 @AllArgsConstructor
 public class Ficha {
 
-	private Integer idFicha;
-	private String nombreAlumno;
-	private String apellidoPaterno;
+	private Integer numeroFicha;
+	private String names;
+	private String lastName;
+	private String secondLastName;
+	private Integer age;
 	private String curp;
-	private String numeroTelefono;
-	private String correoElectronico;
-	private Integer opEspecialidadOne;
-	private Integer opEspecialidadTwo;
-	private Integer fkIdEspecialidad;
-	private Integer fkIdDiscapacidad;
-	private Integer fkIdLengua;
+	private String actualResidencia;
+	private String address;
+	private String birthPlace;
+	private String op1Especilty;
+	private String op2Especilty;
+	private String email;
+	private String contact;
+	private String detailLanguaje;
+	private String detailDisability;
+	private String kindSchool;
 	
-	public Ficha(String nombreAlumno, String apellidoPaterno, String curp, String numeroTelefono,
-			String correoElectronico, Integer opEspecialidadOne, Integer opEspecialidadTwo, Integer fkIdEspecidad,
-			Integer fkIdDiscapacidad, Integer fkIdLengua) {
-		this.nombreAlumno = nombreAlumno;
-		this.apellidoPaterno = apellidoPaterno;
+	public Ficha(String names, String lastName, String secondLastName, Integer age, String curp,
+			String actualResidencia, String address, String birthPlace, String op1Especilty, String op2Especilty,
+			String email, String contact, String detailLanguaje, String detailDisability, String kindSchool) {
+		
+		this.names = names;
+		this.lastName = lastName;
+		this.secondLastName = secondLastName;
+		this.age = age;
 		this.curp = curp;
-		this.numeroTelefono = numeroTelefono;
-		this.correoElectronico = correoElectronico;
-		this.opEspecialidadOne = opEspecialidadOne;
-		this.opEspecialidadTwo = opEspecialidadTwo;
-		this.fkIdDiscapacidad = fkIdEspecidad;
-		this.fkIdDiscapacidad = fkIdDiscapacidad;
-		this.fkIdLengua = fkIdLengua;
+		this.actualResidencia = actualResidencia;
+		this.address = address;
+		this.birthPlace = birthPlace;
+		this.op1Especilty = op1Especilty;
+		this.op2Especilty = op2Especilty;
+		this.email = email;
+		this.contact = contact;
+		this.detailLanguaje = detailLanguaje;
+		this.detailDisability = detailDisability;
+		this.kindSchool = kindSchool;
 	}
 	
-	public Ficha(String nombreAlumno, String apellidoPaterno, String curp, String numeroTelefono,
-			Integer opEspecialidadOne, Integer opEspecialidadTwo, Integer fkIdEspecidad, Integer fkIdDiscapacidad,
-			Integer fkIdLengua) {
-		this.nombreAlumno = nombreAlumno;
-		this.apellidoPaterno = apellidoPaterno;
-		this.curp = curp;
-		this.numeroTelefono = numeroTelefono;
-		this.opEspecialidadOne = opEspecialidadOne;
-		this.opEspecialidadTwo = opEspecialidadTwo;
-		this.fkIdDiscapacidad = fkIdEspecidad;
-		this.fkIdDiscapacidad = fkIdDiscapacidad;
-		this.fkIdLengua = fkIdLengua;
-	}
+	
+	
 	
 	
 	
