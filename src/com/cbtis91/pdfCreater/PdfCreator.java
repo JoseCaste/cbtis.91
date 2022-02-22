@@ -2,6 +2,9 @@ package com.cbtis91.pdfCreater;
 
 import java.io.File;
 import java.io.IOException;
+
+import com.cbtis91.dao.DAOFicha;
+import com.cbtis91.models.Ficha;
 import com.itextpdf.io.font.constants.StandardFonts;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
@@ -23,6 +26,7 @@ public class PdfCreator {
 	private String secondLastName;
 	private Integer age;
 	private String curp;
+	private String actualResidencia;
 	private String address;
 	private String birthPlace;
 	private String op1Especilty;
@@ -35,26 +39,31 @@ public class PdfCreator {
 	private String detailDisability;
 	private String kindSchool;
 	private String optionalNote;
+	private DAOFicha daoFicha;
 	
-	public PdfCreator(String names, String lastName, String secondLastName, Integer age, String curp, String address,
-			String birthPlace, String op1Especilty, String op2Especilty, String contact, String languaje,
-			String disability, String kindSchool) {
+	public PdfCreator(String names, String lastName, String secondLastName, Integer age, String curp, String actualResidencia,String address,
+			String birthPlace, String op1Especilty, String op2Especilty, String email,String contact, String languaje,
+			String disability, String kindSchool, String optionalNote) {
 		this.names = names;
 		this.lastName = lastName;
 		this.secondLastName = secondLastName;
 		this.age = age;
 		this.curp = curp;
+		this.actualResidencia=actualResidencia;
 		this.address = address;
 		this.birthPlace = birthPlace;
 		this.op1Especilty = op1Especilty;
 		this.op2Especilty = op2Especilty;
+		this.email=email;
 		this.contact = contact;
 		this.languaje = languaje;
 		this.disability = disability;
 		this.kindSchool = kindSchool;
+		this.optionalNote=optionalNote;
+		this.daoFicha= new DAOFicha();
 	}
 	public boolean createFicha(int actualYear) {
-		saveFicha();
+		int numeroFicha=saveFicha();
 		try {
 			
 			File file = new File(String.format("/home/jose/Documents/PDFs/%s.pdf", this.curp));
@@ -76,7 +85,7 @@ public class PdfCreator {
 	        
 	        document.add(new Paragraph(String.format("FICHA DE INGRESO %d", actualYear)).setFont(font).setTextAlignment(TextAlignment.CENTER).setFontSize(9).setUnderline());
 
-	        document.add(new Paragraph("No. de FICHA: "+"5").setTextAlignment(TextAlignment.RIGHT).setFont(font).setFontSize(9));
+	        document.add(new Paragraph(String.format("No. de FICHA: %d", numeroFicha)).setTextAlignment(TextAlignment.RIGHT).setFont(font).setFontSize(9));
 	        document.add(new Paragraph(" "));
 	        document.add(new Paragraph(" "));
 	        document.add(new Paragraph(" "));
@@ -111,11 +120,11 @@ public class PdfCreator {
 	        
 	        document.add(new Paragraph(" "));
 	        
-	        document.add(new Paragraph("FICHA DE SOLICITUD DE EXAMEN DE INGRESO").setFont(font).setTextAlignment(TextAlignment.CENTER).setFontSize(9).setUnderline());
+	        document.add(new Paragraph(String.format("FICHA DE INGRESO %d", actualYear)).setFont(font).setTextAlignment(TextAlignment.CENTER).setFontSize(9).setUnderline());
 
 	        document.add(new Paragraph(" "));
 	        
-	        document.add(new Paragraph("No. de FICHA: "+"5").setTextAlignment(TextAlignment.RIGHT).setFont(font).setFontSize(9));
+	        document.add(new Paragraph(String.format("No. de FICHA: %d", numeroFicha)).setTextAlignment(TextAlignment.RIGHT).setFont(font).setFontSize(9));
 	        document.add(new Paragraph(" "));
 	        document.add(new Paragraph(" "));
 	        document.add(new Paragraph(" "));
@@ -149,8 +158,11 @@ public class PdfCreator {
 		document.add(ls);
 		
 	}
-	private void saveFicha() {
-		
+	private int saveFicha() {
+		Ficha ficha= new Ficha(this.names, this.lastName, this.secondLastName, this.age, this.curp, this.actualResidencia, this.address, this.birthPlace, this.op1Especilty, this.op2Especilty, this.email, this.contact, this.languaje, this.disability, this.kindSchool);
+		daoFicha.save(ficha);
+
+		return ficha.getNumeroFicha();
 		
 	}
 
