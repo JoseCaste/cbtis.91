@@ -74,7 +74,7 @@ public class DAOFicha implements IDAOcrud<Ficha> {
 			callableStatement.setInt(4, data.getAge());
 			callableStatement.setString(5, data.getCurp());
 			//buscar id de la localidad
-			Localidad localidad= this.daoLocalidades.getById(data.getActualResidencia());
+			Localidad localidad= this.daoLocalidades.getByName(data.getActualResidencia());
 			callableStatement.setInt(6, localidad.getIdLocalidad());
 			
 			callableStatement.setString(7, data.getAddress());
@@ -83,18 +83,18 @@ public class DAOFicha implements IDAOcrud<Ficha> {
 			callableStatement.setString(10, data.getEmail());
 			
 			//buscar id de la especialidad
-			Especialidad especialidad1= this.daoEspecialidad.getById(data.getOp1Especilty());
-			Especialidad especialidad2= this.daoEspecialidad.getById(data.getOp2Especilty());
+			Especialidad especialidad1= this.daoEspecialidad.getByName(data.getOp1Especilty());
+			Especialidad especialidad2= this.daoEspecialidad.getByName(data.getOp2Especilty());
 			
 			callableStatement.setInt(11, especialidad1.getId_especialidad());
 			callableStatement.setInt(12, especialidad2.getId_especialidad());
 			
 			//buscar id de la lengua
-			Lengua lengua= this.daoLengua.getById(data.getDetailLanguaje());
+			Lengua lengua= this.daoLengua.getByName(data.getDetailLanguaje());
 			callableStatement.setInt(13, lengua.getIdLengua());
 			
 			//buscar id de discapacidad
-			Discapacidad discapacidad= this.daoDiscapacidad.getById(data.getDetailDisability());
+			Discapacidad discapacidad= this.daoDiscapacidad.getByName(data.getDetailDisability());
 			callableStatement.setInt(14, discapacidad.getIdDiscapacidad());
 			
 			callableStatement.setString(15, data.getKindSchool());
@@ -121,7 +121,7 @@ public class DAOFicha implements IDAOcrud<Ficha> {
 	}
 
 	@Override
-	public Ficha getById(String name) {
+	public Ficha getByName(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}

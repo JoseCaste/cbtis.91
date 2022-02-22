@@ -58,7 +58,7 @@ public class DAOLocalidades implements IDAOcrud<Localidad> {
 	}
 
 	@Override
-	public Localidad getById(String name) {
+	public Localidad getByName(String name) {
 		try {
 			this.statement= this.connectionDB.getCon().createStatement();
 			this.resultSet= this.statement.executeQuery(String.format("SELECT * FROM localidades l WHERE l.nombre_localidad like '%s'", name));

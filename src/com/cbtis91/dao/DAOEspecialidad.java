@@ -54,7 +54,7 @@ public class DAOEspecialidad implements IDAOcrud<Especialidad> {
 	}
 
 	@Override
-	public Especialidad getById(String name) {
+	public Especialidad getByName(String name) {
 		try {
 			this.statement= this.connectionDB.getCon().createStatement();
 			this.resultSet= this.statement.executeQuery(String.format("SELECT * FROM especialidad e WHERE e.nombre_especialidad like '%s'", name));

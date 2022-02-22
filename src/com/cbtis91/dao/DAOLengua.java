@@ -52,7 +52,7 @@ public class DAOLengua implements IDAOcrud<Lengua> {
 	}
 
 	@Override
-	public Lengua getById(String name) {
+	public Lengua getByName(String name) {
 		try {
 		
 			this.statement= this.connectionDB.getCon().createStatement();

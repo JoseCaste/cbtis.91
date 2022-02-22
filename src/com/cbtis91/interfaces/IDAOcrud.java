@@ -6,5 +6,5 @@ public interface IDAOcrud<T> {
 
 	public boolean save(T data);
 	public List<T> getAll();
-	public T getById();
+	public T getByName(String name);
 }

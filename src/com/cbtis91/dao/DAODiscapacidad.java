@@ -53,7 +53,7 @@ public class DAODiscapacidad implements IDAOcrud<Discapacidad> {
 	}
 
 	@Override
-	public Discapacidad getById(String name) {
+	public Discapacidad getByName(String name) {
 		try {
 			
 			this.statement= this.connectionDB.getCon().createStatement();
