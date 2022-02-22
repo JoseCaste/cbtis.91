@@ -18,6 +18,7 @@ import com.cbtis91.dao.DAOLengua;
 import com.cbtis91.models.Discapacidad;
 import com.cbtis91.models.Especialidad;
 import com.cbtis91.models.Lengua;
+import com.cbtis91.pdfCreater.PdfCreator;
 import com.cbtis91.views.RegisterSolicitudIngreso;
 
 public class SolicitudIngresoController implements ActionListener{
@@ -120,7 +121,22 @@ public class SolicitudIngresoController implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.registerSolicitudIngreso.btnRegister) {
 			if(JOptionPane.showConfirmDialog(null, "Confirmación de generación de ficha")==0) {
-				
+				String names= this.registerSolicitudIngreso.txtNames.getText();
+				String lastName=this.registerSolicitudIngreso.txtLastaName.getText();
+				String secondLastname=this.registerSolicitudIngreso.txtSecondLastName.getText();
+				String curp= this.registerSolicitudIngreso.txtCurp.getText();
+				String address=this.registerSolicitudIngreso.txtAddress.getText();
+				String email=this.registerSolicitudIngreso.txtEmail.getText();
+				String op1= this.registerSolicitudIngreso.comboSpecialty.getSelectedItem().toString();
+				String op2= this.registerSolicitudIngreso.comboSpecialty2.getSelectedItem().toString();
+				String optionalNote=this.registerSolicitudIngreso.textArea.getText();
+				String contact=this.registerSolicitudIngreso.txtContact.getText();
+				PdfCreator pdfCreator= new PdfCreator(names, lastName, secondLastname, null, curp, address, curp, op1, op2, address, email, op1, op2);
+				pdfCreator.setOptionalNote(optionalNote);
+				pdfCreator.setContact(contact);
+				pdfCreator.setEmail(email);
+				if(pdfCreator.createFicha()) JOptionPane.showMessageDialog(null, "¡Ficha de "+lastName+" "+secondLastname+" "+names+" creado exitosamente!");
+				else JOptionPane.showMessageDialog(null, "Algo ocurrió en el proceso","Error",2);
 			}
 		}
 		

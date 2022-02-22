@@ -46,6 +46,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 	public JComboBox comboLanguaje;
 	public JComboBox comboDetails;
 	public JButton btnRegister;
+	public JTextArea textArea;
 
 	/**
 	 * Launch the application.
@@ -178,17 +179,17 @@ public class RegisterSolicitudIngreso extends JFrame{
 		txtEmail.setColumns(10);
 
 		JLabel lblNmeroDeTelfono = new JLabel("Número de teléfono");
-		lblNmeroDeTelfono.setBounds(486, 76, 235, 15);
+		lblNmeroDeTelfono.setBounds(486, 84, 235, 15);
 		panel.add(lblNmeroDeTelfono);
 
 		txtContact = new JTextField();
-		txtContact.setBounds(767, 72, 173, 19);
+		txtContact.setBounds(767, 80, 173, 19);
 		panel.add(txtContact);
 		txtContact.setColumns(10);
 
 		JLabel lblrequerido_1_1 = new JLabel("*Requerido");
 		lblrequerido_1_1.setForeground(Color.RED);
-		lblrequerido_1_1.setBounds(767, 97, 173, 15);
+		lblrequerido_1_1.setBounds(767, 105, 173, 15);
 		panel.add(lblrequerido_1_1);
 
 		JPanel panel_1 = new JPanel();
@@ -283,7 +284,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 		scrollPane.setBounds(553, 473, 387, 135);
 		panel.add(scrollPane);
 		
-				JTextArea textArea = new JTextArea();
+				textArea = new JTextArea();
 				scrollPane.setViewportView(textArea);
 
 		JPanel panel_2 = new JPanel();
@@ -336,6 +337,11 @@ public class RegisterSolicitudIngreso extends JFrame{
 		btnRegister.setBackground(new Color(0, 0, 153));
 		btnRegister.setBounds(404, 640, 152, 36);
 		panel.add(btnRegister);
+		
+		JLabel lblrequerido_1_1_1 = new JLabel("*Requerido");
+		lblrequerido_1_1_1.setForeground(Color.RED);
+		lblrequerido_1_1_1.setBounds(767, 56, 173, 15);
+		panel.add(lblrequerido_1_1_1);
 
 		comboDiscapacidad.addActionListener(new ActionListener() {
 
