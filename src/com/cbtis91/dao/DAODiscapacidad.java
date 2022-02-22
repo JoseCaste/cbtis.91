@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JOptionPane;
+
 import com.cbtis91.databases_items.ConnectionDB;
 import com.cbtis91.interfaces.IDAOcrud;
 import com.cbtis91.models.Discapacidad;
@@ -51,9 +53,24 @@ public class DAODiscapacidad implements IDAOcrud<Discapacidad> {
 	}
 
 	@Override
-	public Discapacidad getById() {
-		// TODO Auto-generated method stub
-		return null;
+	public Discapacidad getById(String name) {
+		try {
+			
+			this.statement= this.connectionDB.getCon().createStatement();
+			this.resultSet= this.statement.executeQuery(String.format("SELECT * FROM discapacidad d WHERE d.nombre_discapacidad like '%s'", name));
+				if(this.resultSet.next())
+				
+					return new Discapacidad(this.resultSet.getInt("id_discapacidad"), this.resultSet.getString("nombre_discapacidad"));
+				
+				else return null;
+		}catch (Exception e) {
+			
+			logger.log(Level.WARNING,"Error al recuperar datos de la tabla discapacidad {0}",e);
+			
+			JOptionPane.showMessageDialog(null, "Error al recuperar datos de la discapacidad","Error",2);
+			
+			return null;
+		}
 	}
 
 }
