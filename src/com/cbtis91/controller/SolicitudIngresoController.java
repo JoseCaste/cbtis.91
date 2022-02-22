@@ -53,6 +53,26 @@ public class SolicitudIngresoController implements ActionListener{
 	private void loadListerners() {
 		this.registerSolicitudIngreso.btnRegister.addActionListener(this);
 		onlyNumbersTextField();
+		onlyEighteenCharactersCURP();
+	}
+
+
+	private void onlyEighteenCharactersCURP() {
+		this.registerSolicitudIngreso.txtCurp.addFocusListener(new FocusAdapter() {
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				// TODO Auto-generated method stub
+				JTextField curp= (JTextField) e.getSource();
+				
+				if(curp.getText().length()!=18) {
+					JOptionPane.showMessageDialog(null, "El dato CURP no cumple con los requisitos de longitud","Error",2);
+					curp.requestFocus();
+				}
+			}
+			
+		});
+		
 	}
 
 
