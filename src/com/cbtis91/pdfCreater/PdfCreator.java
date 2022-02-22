@@ -84,8 +84,10 @@ public class PdfCreator {
 	        document.add(new Paragraph(" "));
 	        
 	        document.add(new Paragraph(String.format("FICHA DE INGRESO %d", actualYear)).setFont(font).setTextAlignment(TextAlignment.CENTER).setFontSize(9).setUnderline());
-
-	        document.add(new Paragraph(String.format("No. de FICHA: %d", numeroFicha)).setTextAlignment(TextAlignment.RIGHT).setFont(font).setFontSize(9));
+	        
+	        final String numeroFichaReformat=(numeroFicha < 10 ? String.format("00%d", numeroFicha): numeroFicha>99? String.format("%d", numeroFicha):String.format("0%d", numeroFicha));
+	        
+	        document.add(new Paragraph(String.format("No. de FICHA: %s", numeroFichaReformat)).setTextAlignment(TextAlignment.RIGHT).setFont(font).setFontSize(9));
 	        document.add(new Paragraph(" "));
 	        document.add(new Paragraph(" "));
 	        document.add(new Paragraph(" "));
