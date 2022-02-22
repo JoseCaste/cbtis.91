@@ -46,6 +46,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 	public JComboBox comboLanguaje;
 	public JComboBox comboDetails;
 	public JButton btnRegister;
+	public JComboBox comboResidencia;
 	public JTextArea textArea;
 
 	/**
@@ -70,7 +71,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 	@SuppressWarnings({ "unchecked" })
 	public RegisterSolicitudIngreso() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1015, 771);
+		setBounds(100, 100, 1158, 861);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaptionBorder);
@@ -81,7 +82,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Datos del alumno", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(12, 12, 989, 722);
+		panel.setBounds(12, 12, 1119, 812);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
@@ -90,7 +91,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 		panel.add(lblNombres);
 
 		txtNames = new JTextField();
-		txtNames.setBounds(225, 35, 175, 19);
+		txtNames.setBounds(225, 35, 235, 19);
 		panel.add(txtNames);
 		txtNames.setColumns(10);
 
@@ -99,7 +100,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 		panel.add(lblApellidoPaterno);
 
 		txtLastaName = new JTextField();
-		txtLastaName.setBounds(225, 99, 175, 19);
+		txtLastaName.setBounds(225, 99, 235, 19);
 		panel.add(txtLastaName);
 		txtLastaName.setColumns(10);
 
@@ -108,7 +109,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 		panel.add(lblApellidoMaterno);
 
 		txtSecondLastName = new JTextField();
-		txtSecondLastName.setBounds(225, 154, 175, 19);
+		txtSecondLastName.setBounds(225, 154, 235, 19);
 		panel.add(txtSecondLastName);
 		txtSecondLastName.setColumns(10);
 
@@ -117,25 +118,25 @@ public class RegisterSolicitudIngreso extends JFrame{
 		panel.add(lblEdad);
 
 		txtAge = new JTextField();
-		txtAge.setBounds(225, 216, 175, 19);
+		txtAge.setBounds(225, 216, 235, 19);
 		panel.add(txtAge);
 		txtAge.setColumns(10);
 
-		JLabel lblCurp = new JLabel("Curp");
+		JLabel lblCurp = new JLabel("CURP");
 		lblCurp.setBounds(12, 289, 70, 15);
 		panel.add(lblCurp);
 
 		txtCurp = new JTextField();
-		txtCurp.setBounds(225, 287, 175, 19);
+		txtCurp.setBounds(225, 287, 235, 19);
 		panel.add(txtCurp);
 		txtCurp.setColumns(10);
 
 		JLabel lblDireccin = new JLabel("Dirección");
-		lblDireccin.setBounds(12, 356, 107, 15);
+		lblDireccin.setBounds(12, 422, 107, 15);
 		panel.add(lblDireccin);
 
 		txtAddress = new JTextField();
-		txtAddress.setBounds(225, 354, 175, 19);
+		txtAddress.setBounds(225, 420, 235, 19);
 		panel.add(txtAddress);
 		txtAddress.setColumns(10);
 
@@ -166,35 +167,35 @@ public class RegisterSolicitudIngreso extends JFrame{
 
 		JLabel lblrequerido_5 = new JLabel("*Requerido");
 		lblrequerido_5.setForeground(Color.RED);
-		lblrequerido_5.setBounds(225, 382, 175, 15);
+		lblrequerido_5.setBounds(225, 448, 175, 15);
 		panel.add(lblrequerido_5);
 
 		JLabel lblCorreoElectrnico = new JLabel("Correo electrónico");
-		lblCorreoElectrnico.setBounds(486, 28, 235, 15);
+		lblCorreoElectrnico.setBounds(599, 28, 235, 15);
 		panel.add(lblCorreoElectrnico);
 
 		txtEmail = new JTextField();
-		txtEmail.setBounds(767, 24, 173, 19);
+		txtEmail.setBounds(880, 24, 217, 19);
 		panel.add(txtEmail);
 		txtEmail.setColumns(10);
 
 		JLabel lblNmeroDeTelfono = new JLabel("Número de teléfono");
-		lblNmeroDeTelfono.setBounds(486, 84, 235, 15);
+		lblNmeroDeTelfono.setBounds(599, 84, 235, 15);
 		panel.add(lblNmeroDeTelfono);
 
 		txtContact = new JTextField();
-		txtContact.setBounds(767, 80, 173, 19);
+		txtContact.setBounds(880, 80, 217, 19);
 		panel.add(txtContact);
 		txtContact.setColumns(10);
 
 		JLabel lblrequerido_1_1 = new JLabel("*Requerido");
 		lblrequerido_1_1.setForeground(Color.RED);
-		lblrequerido_1_1.setBounds(767, 105, 173, 15);
+		lblrequerido_1_1.setBounds(880, 105, 173, 15);
 		panel.add(lblrequerido_1_1);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Lenguaje", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(486, 137, 454, 115);
+		panel_1.setBounds(599, 130, 498, 115);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -205,7 +206,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 
 		comboDetails = new JComboBox(); //TODO cargar datos desde base de datos 
 		comboDetails.setEnabled(false);
-		comboDetails.setBounds(293, 72, 149, 23);
+		comboDetails.setBounds(293, 72, 193, 23);
 		panel_1.add(comboDetails);
 		
 		JLabel lblLanguaje = new JLabel("¿Habla alguna lengua indígena?");
@@ -213,7 +214,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 		panel_1.add(lblLanguaje);
 
 		comboLanguaje = new JComboBox();
-		comboLanguaje.setBounds(293, 12, 149, 23);
+		comboLanguaje.setBounds(293, 12, 193, 23);
 		panel_1.add(comboLanguaje);
 		comboLanguaje.setModel(new DefaultComboBoxModel(new String[] { "Ninguno", "Si", "No" }));
 		comboLanguaje.addActionListener(new ActionListener() {
@@ -237,59 +238,59 @@ public class RegisterSolicitudIngreso extends JFrame{
 		lblrequerido_1_2.setForeground(Color.RED);
 
 		JLabel lblLugarDeNacimiento = new JLabel("Lugar de nacimiento");
-		lblLugarDeNacimiento.setBounds(12, 423, 159, 15);
+		lblLugarDeNacimiento.setBounds(12, 489, 159, 15);
 		panel.add(lblLugarDeNacimiento);
 
 		txtBirthLocation = new JTextField();
-		txtBirthLocation.setBounds(225, 421, 175, 19);
+		txtBirthLocation.setBounds(225, 487, 235, 19);
 		panel.add(txtBirthLocation);
 		txtBirthLocation.setColumns(10);
 
 		JLabel lblrequerido_5_1 = new JLabel("*Requerido");
 		lblrequerido_5_1.setForeground(Color.RED);
-		lblrequerido_5_1.setBounds(225, 452, 175, 15);
+		lblrequerido_5_1.setBounds(225, 518, 175, 15);
 		panel.add(lblrequerido_5_1);
 
 		JLabel lblOpcinDe = new JLabel("Opción 1 de especialidad");
-		lblOpcinDe.setBounds(12, 500, 194, 15);
+		lblOpcinDe.setBounds(12, 550, 194, 15);
 		panel.add(lblOpcinDe);
 
 		comboSpecialty = new JComboBox();
-		comboSpecialty.setBounds(225, 495, 175, 20);
+		comboSpecialty.setBounds(225, 545, 235, 20);
 		panel.add(comboSpecialty);
 
 		JLabel lblrequerido_5_1_1 = new JLabel("*Requerido");
 		lblrequerido_5_1_1.setForeground(Color.RED);
-		lblrequerido_5_1_1.setBounds(225, 527, 175, 15);
+		lblrequerido_5_1_1.setBounds(225, 577, 175, 15);
 		panel.add(lblrequerido_5_1_1);
 
 		JLabel lblOpcinDe_2 = new JLabel("Opción 2 de especialidad");
-		lblOpcinDe_2.setBounds(12, 566, 194, 15);
+		lblOpcinDe_2.setBounds(12, 616, 194, 15);
 		panel.add(lblOpcinDe_2);
 
 		comboSpecialty2 = new JComboBox(); // TODO traer datos de base de datos
-		comboSpecialty2.setBounds(225, 561, 175, 20);
+		comboSpecialty2.setBounds(225, 611, 235, 20);
 		panel.add(comboSpecialty2);
 
 		JLabel lblrequerido_5_1_1_1 = new JLabel("*Requerido");
 		lblrequerido_5_1_1_1.setForeground(Color.RED);
-		lblrequerido_5_1_1_1.setBounds(225, 593, 175, 15);
+		lblrequerido_5_1_1_1.setBounds(225, 643, 175, 15);
 		panel.add(lblrequerido_5_1_1_1);
 
 		JLabel lblNota = new JLabel("Nota");
-		lblNota.setBounds(486, 473, 70, 15);
+		lblNota.setBounds(599, 489, 70, 15);
 		panel.add(lblNota);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(553, 473, 387, 135);
+		scrollPane.setBounds(710, 496, 387, 162);
 		panel.add(scrollPane);
 		
-				textArea = new JTextArea();
-				scrollPane.setViewportView(textArea);
+		textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(null, "Discapacidad", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(486, 267, 454, 130);
+		panel_2.setBounds(599, 273, 498, 130);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -299,7 +300,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 		
 		comboDiscapacidad = new JComboBox();
 		comboDiscapacidad.setModel(new DefaultComboBoxModel(new String[] {"Ninguno","Si","No"}));
-		comboDiscapacidad.setBounds(296, 25, 146, 24);
+		comboDiscapacidad.setBounds(296, 25, 190, 24);
 		panel_2.add(comboDiscapacidad);
 		
 		
@@ -315,33 +316,41 @@ public class RegisterSolicitudIngreso extends JFrame{
 		
 		comboDetailsDisability = new JComboBox();
 		comboDetailsDisability.setEnabled(false);
-		comboDetailsDisability.setBounds(293, 79, 149, 23);
+		comboDetailsDisability.setBounds(293, 79, 193, 23);
 		panel_2.add(comboDetailsDisability);
 		
 		JLabel lblTipoDeSecundaria = new JLabel("Tipo de secundaria");
-		lblTipoDeSecundaria.setBounds(486, 414, 159, 15);
+		lblTipoDeSecundaria.setBounds(609, 421, 159, 15);
 		panel.add(lblTipoDeSecundaria);
 		
 		comboSchoolType = new JComboBox();
 		comboSchoolType.setModel(new DefaultComboBoxModel(new String[] {"Técnica","General","Telesecundaria"}));
-		comboSchoolType.setBounds(781, 409, 159, 23);
+		comboSchoolType.setBounds(904, 416, 193, 23);
 		panel.add(comboSchoolType);
 		
 		JLabel lblrequerido_1_2_1_1 = new JLabel("*Requerido");
 		lblrequerido_1_2_1_1.setForeground(Color.RED);
-		lblrequerido_1_2_1_1.setBounds(781, 441, 149, 15);
+		lblrequerido_1_2_1_1.setBounds(904, 448, 149, 15);
 		panel.add(lblrequerido_1_2_1_1);
 		
 		btnRegister = new JButton("Registrar");
 		btnRegister.setForeground(Color.WHITE);
 		btnRegister.setBackground(new Color(0, 0, 153));
-		btnRegister.setBounds(404, 640, 152, 36);
+		btnRegister.setBounds(461, 715, 152, 36);
 		panel.add(btnRegister);
 		
 		JLabel lblrequerido_1_1_1 = new JLabel("*Requerido");
 		lblrequerido_1_1_1.setForeground(Color.RED);
-		lblrequerido_1_1_1.setBounds(767, 56, 173, 15);
+		lblrequerido_1_1_1.setBounds(880, 56, 173, 15);
 		panel.add(lblrequerido_1_1_1);
+		
+		JLabel lblResidenciaActual = new JLabel("Residencia actual");
+		lblResidenciaActual.setBounds(12, 362, 159, 15);
+		panel.add(lblResidenciaActual);
+		
+		comboResidencia = new JComboBox();
+		comboResidencia.setBounds(225, 362, 235, 20);
+		panel.add(comboResidencia);
 
 		comboDiscapacidad.addActionListener(new ActionListener() {
 
