@@ -70,6 +70,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 	 */
 	@SuppressWarnings({ "unchecked" })
 	public RegisterSolicitudIngreso() {
+		setTitle("CBTis91 Registro de Fichas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1158, 861);
 		setLocationRelativeTo(null);
