@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JOptionPane;
+
 import com.cbtis91.databases_items.ConnectionDB;
 import com.cbtis91.interfaces.IDAOcrud;
 import com.cbtis91.models.Discapacidad;
@@ -39,6 +41,22 @@ public class DAOFicha implements IDAOcrud<Ficha> {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			logger.log(Level.WARNING, "Error en crear la intancia Statament en DAOLengua{0}", e);
+		}
+	}
+	public boolean resetNumberFichaCounter() {
+		try {
+			//this.statement= this.connectionDB.getCon().createStatement();
+			final int rowsUpdated= this.statement.executeUpdate("UPDATE numeroFicha SET numero_ficha = 1");
+			if(rowsUpdated>0)
+				return true;
+			else 
+				return false;
+		} catch (SQLException e) {
+			logger.log(Level.WARNING,"Error al recuperar datos de la tabla numeroFicha",e);
+			JOptionPane.showMessageDialog(null, "Error al recuperar datos de la tabla numeroFicha");
+			e.printStackTrace();
+			return false;
+
 		}
 	}
 	@Override

@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
 import com.cbtis91.dao.DAODiscapacidad;
 import com.cbtis91.dao.DAOEspecialidad;
+import com.cbtis91.dao.DAOFicha;
 import com.cbtis91.dao.DAOLengua;
 import com.cbtis91.dao.DAOLocalidades;
 import com.cbtis91.models.Discapacidad;
@@ -33,6 +33,7 @@ public class SolicitudIngresoController implements ActionListener{
 	private DAODiscapacidad daoDiscapacidad;
 	private DAOEspecialidad daoEspecialidad;
 	private DAOLocalidades daoLocalidades;
+	private DAOFicha daoFicha;
 	private int actualYear;
 	private static final Logger logger= Logger.getLogger(SolicitudIngresoController.class.getName());
 	/**
@@ -43,6 +44,7 @@ public class SolicitudIngresoController implements ActionListener{
 		this.daoDiscapacidad= new DAODiscapacidad();
 		this.daoEspecialidad= new DAOEspecialidad();
 		this.daoLocalidades= new DAOLocalidades();
+		this.daoFicha= new DAOFicha();
 		this.registerSolicitudIngreso = registerSolicitudIngreso;
 		this.actualYear=LocalDate.now().getYear();
 		loadComboBoxesResources();
@@ -59,6 +61,19 @@ public class SolicitudIngresoController implements ActionListener{
 				final String nota = JOptionPane.showInputDialog("Ingrese la nota");
 				registerSolicitudIngreso.textArea.setText(nota);
 				
+			}
+		});
+		this.registerSolicitudIngreso.mntmReinciarNmeroDe.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int op1= JOptionPane.showConfirmDialog(null, "Confirmación de reinicio de número de fichas","Advertencia",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+				if(op1 == 0) {
+					if(daoFicha.resetNumberFichaCounter())
+						JOptionPane.showMessageDialog(null, "Número de fichas reiniciado con éxito");
+					else 
+						JOptionPane.showMessageDialog(null, "No se pudo reiniciar el número de ficha");
+				}
 			}
 		});
 	}
