@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+import com.itextpdf.io.font.constants.FontStyles;
 import com.itextpdf.io.font.constants.StandardFonts;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
@@ -67,6 +68,10 @@ public class ItextTest {
 	        document.add(new Paragraph(" "));
 	        document.add(new Paragraph(" "));
 	        document.add(new Paragraph(" "));
+	        Table table= new Table(UnitValue.createPercentArray(new float[]{15f, 20f}));
+	        table.addCell(createCell("OPCION 1 DE ESPECIALIDAD").setFont(font));
+	        table.addCell(createCell("Test underline").setUnderline());
+	        document.add(table);
 	        document.add(new Paragraph("NOMBRE DEL ALUMNO: Castellanos Guzmán Juan José").setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
 	        document.add(new Paragraph("CURP: 1123CURP").setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
 	        document.add(new Paragraph("TELEFONO: 9712212212").setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
@@ -133,6 +138,12 @@ public class ItextTest {
 		ls.setMarginTop(5);
 		document.add(ls);
 		
+	}
+	public static Cell createCell(String text) {
+		Cell cell= new Cell();
+		cell.add(new Paragraph(text).setPaddingLeft(48));
+		cell.setBorder(null);
+		return cell;
 	}
 	public static Cell createImageCell(String path) throws MalformedURLException {
 	    Image img = new Image(ImageDataFactory.create(path));
