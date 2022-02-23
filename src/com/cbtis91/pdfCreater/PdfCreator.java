@@ -174,16 +174,6 @@ public class PdfCreator {
 	        
 	        document.add(table);
 	        
-	        /*document.add(new Paragraph(String.format("NOMBRE DEL ALUMNO: %s %s %s", this.lastName,this.secondLastName,this.names)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        document.add(new Paragraph(String.format("CURP: %s", this.curp)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        document.add(new Paragraph(String.format("TELEFONO: %s", this.contact)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        document.add(new Paragraph(String.format("CORREO ELECTRÓNICO: %s", this.email)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        document.add(new Paragraph(String.format("LUGAR DE NACIEMIENTO: %s", this.birthPlace)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        document.add(new Paragraph(String.format("OPCION 1 DE ESPECIALIDAD : %s", this.op1Especilty)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        document.add(new Paragraph(String.format("OPCION 2 DE ESPECIALIDAD : %s", this.op2Especilty)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        
-	        document.add(new Paragraph(" "));*/
-	        
 	        document.add(new Paragraph(String.format("NOTA: %s", this.optionalNote)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
 
 	        
