@@ -63,7 +63,7 @@ public class SolicitudIngresoController implements ActionListener{
 			@Override
 			public void focusLost(FocusEvent e) {
 				// TODO Auto-generated method stub
-				JTextField curp= (JTextField) e.getSource();
+				final JTextField curp= (JTextField) e.getSource();
 				
 				if(curp.getText().length()!=18) {
 					JOptionPane.showMessageDialog(null, "El dato CURP no cumple con los requisitos de longitud","Error",2);
