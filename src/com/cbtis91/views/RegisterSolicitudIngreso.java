@@ -15,11 +15,18 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JMenuItem;
 
 @SuppressWarnings("rawtypes")
 public class RegisterSolicitudIngreso extends JFrame{
@@ -353,6 +360,20 @@ public class RegisterSolicitudIngreso extends JFrame{
 		comboResidencia.setBounds(225, 362, 235, 20);
 		panel.add(comboResidencia);
 
+		JMenuBar menuBar = new JMenuBar(); // Window menu bar
+		JMenu fileMenu = new JMenu("Opciones"); // Create File menu
+	    JMenu elementMenu = new JMenu("Ayuda"); // Create Elements menu
+	    menuBar.add(fileMenu); // Add the file menu
+	    
+	    JMenuItem mntmAgregarNota = new JMenuItem("Agregar nota");
+	    fileMenu.add(mntmAgregarNota);
+	    
+	    JMenuItem mntmReinciarNmeroDe = new JMenuItem("Reinciar número de ficha");
+	    fileMenu.add(mntmReinciarNmeroDe);
+	    menuBar.add(elementMenu); // Add the element menu
+	    
+	    setJMenuBar(menuBar);
+	    
 		comboDiscapacidad.addActionListener(new ActionListener() {
 
 			@Override
@@ -369,5 +390,22 @@ public class RegisterSolicitudIngreso extends JFrame{
 		});
 		@SuppressWarnings("unused")
 		SolicitudIngresoController controller= new SolicitudIngresoController(this);
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }
