@@ -70,9 +70,9 @@ public class SolicitudIngresoController implements ActionListener{
 				int op1= JOptionPane.showConfirmDialog(null, "Confirmación de reinicio de número de fichas","Advertencia",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
 				if(op1 == 0) {
 					if(daoFicha.resetNumberFichaCounter())
-						JOptionPane.showMessageDialog(null, "Número de fichas reiniciado con éxito");
+						JOptionPane.showMessageDialog(null, "Número de fichas reiniciado con éxito","Realizado",JOptionPane.YES_OPTION);
 					else 
-						JOptionPane.showMessageDialog(null, "No se pudo reiniciar el número de ficha");
+						JOptionPane.showMessageDialog(null, "No se pudo reiniciar el número de ficha","Error",JOptionPane.YES_OPTION);
 				}
 			}
 		});
@@ -183,7 +183,7 @@ public class SolicitudIngresoController implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.registerSolicitudIngreso.btnRegister) {
-			if(JOptionPane.showConfirmDialog(null, "Confirmación de generación de ficha")==0) {
+			if(JOptionPane.showConfirmDialog(null, "Confirmación de generación de ficha","Confirmación",JOptionPane.YES_NO_OPTION)==0) {
 				try {
 					String names= this.registerSolicitudIngreso.txtNames.getText();
 					
@@ -222,7 +222,7 @@ public class SolicitudIngresoController implements ActionListener{
 					 * String names, String lastName, String secondLastName, Integer age, String curp, String address, String birthPlace, String op1Especilty, String op2Especilty, String contact, String languaje, String disability, String kindSchool*/
 					PdfCreator pdfCreator= new PdfCreator(names, lastName, secondLastname, age, curp, actualResidencia, address, birthPlace, op1, op2, email,contact, lenguaje, disability, kindSchool,optionalNote);
 
-					if(pdfCreator.createFicha(actualYear)) JOptionPane.showMessageDialog(null, "¡Ficha de "+lastName+" "+secondLastname+" "+names+" creado exitosamente!");
+					if(pdfCreator.createFicha(actualYear)) JOptionPane.showMessageDialog(null, "¡Ficha de "+lastName+" "+secondLastname+" "+names+" creado exitosamente!","Elija una opción",JOptionPane.YES_NO_OPTION);
 					else JOptionPane.showMessageDialog(null, "Algo ocurrió en el proceso","Error",2);
 					
 				} catch (NumberFormatException exception) {
