@@ -149,7 +149,16 @@ public class PdfCreator {
 	        Table table= new Table(UnitValue.createPercentArray(new float[]{15f, 20f}));
 	        //table.setHeight(2f);
 	        table.addCell(createCell("NOMBRE DEL ALUMNO: ").setFont(font));
-	        table.addCell(createCellUnderline(String.format("%s %s %s", this.lastName,this.secondLastName,this.names)).setUnderline());
+	        table.addCell(createCellUnderline(String.format("%s %s %s", this.lastName,this.secondLastName,this.names)));
+	        
+	        table.addCell(createCell("CURP: ").setFont(font));
+	        table.addCell(createCellUnderline(this.curp));
+	        
+	        table.addCell(createCell("DIRECCIÓN: ").setFont(font));
+	        table.addCell(createCellUnderline(this.address));
+	        
+	        table.addCell(createCell("TELEFONO: ").setFont(font));
+	        table.addCell(createCellUnderline(this.contact));
 	        
 	        table.addCell(createCell("CORREO ELECTRÓNICO: ").setFont(font));
 	        table.addCell(createCellUnderline(this.email));
@@ -157,10 +166,10 @@ public class PdfCreator {
 	        table.addCell(createCell("LUGAR DE NACIMIENTO: ").setFont(font));
 	        table.addCell(createCellUnderline(this.birthPlace));
 	        
-	        table.addCell(createCell("OPCION 1 DE ESPECIALIDAD").setFont(font));
+	        table.addCell(createCell("OPCION 1 DE ESPECIALIDAD: ").setFont(font));
 	        table.addCell(createCellUnderline(this.op1Especilty));
 	        
-	        table.addCell(createCell("OPCION 2 DE ESPECIALIDAD").setFont(font));
+	        table.addCell(createCell("OPCION 2 DE ESPECIALIDAD: ").setFont(font));
 	        table.addCell(createCellUnderline(this.op2Especilty));
 	        
 	        document.add(table);
@@ -191,7 +200,7 @@ public class PdfCreator {
 	}
 	public static Cell createCellUnderline(String text) {
 		Cell cell= new Cell();
-		cell.add(new Paragraph(text).setFontSize(9));
+		cell.add(new Paragraph(text).setFontSize(9).setPaddingLeft(20));
 		cell.setBorder(null);
 		return cell;
 	}
