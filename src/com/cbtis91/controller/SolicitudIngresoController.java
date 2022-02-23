@@ -115,7 +115,7 @@ public class SolicitudIngresoController implements ActionListener{
 			public void focusLost(FocusEvent e) {
 				JTextField field=(JTextField) e.getSource();
 				if(field.getText().length()!=10) {
-					JOptionPane.showMessageDialog(null, "El número de contacto debe ser 10 dígitos");
+					JOptionPane.showMessageDialog(null, "El número de contacto deben ser 10 dígitos");
 					field.requestFocus();
 				}
 			}
