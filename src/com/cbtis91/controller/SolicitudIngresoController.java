@@ -10,7 +10,8 @@ import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -26,6 +27,7 @@ import com.cbtis91.models.Localidad;
 import com.cbtis91.pdfCreater.PdfCreator;
 import com.cbtis91.views.RegisterSolicitudIngreso;
 
+
 public class SolicitudIngresoController implements ActionListener{
 
 	private RegisterSolicitudIngreso registerSolicitudIngreso;
@@ -36,6 +38,7 @@ public class SolicitudIngresoController implements ActionListener{
 	private DAOFicha daoFicha;
 	private int actualYear;
 	private static final Logger logger= Logger.getLogger(SolicitudIngresoController.class.getName());
+	private List<JTextField> fields; 
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -47,9 +50,36 @@ public class SolicitudIngresoController implements ActionListener{
 		this.daoFicha= new DAOFicha();
 		this.registerSolicitudIngreso = registerSolicitudIngreso;
 		this.actualYear=LocalDate.now().getYear();
+		this.fields= new ArrayList<>();
 		loadComboBoxesResources();
 		loadListerners();
 		loadMenuListerners();
+		loadFields();
+	}
+
+
+	private boolean validateEmptyFields() {
+		for (JTextField jTextField : fields) {
+			if(jTextField.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "El campo "+jTextField.getName()+" no debe estar vacío","Error",2);
+				return false;
+			}
+		}
+		return true;
+		
+	}
+
+
+	private void loadFields() {
+		this.fields.add(this.registerSolicitudIngreso.txtNames);
+		this.fields.add(this.registerSolicitudIngreso.txtLastaName);
+		this.fields.add(this.registerSolicitudIngreso.txtSecondLastName);
+		this.fields.add(this.registerSolicitudIngreso.txtCurp);
+		this.fields.add(this.registerSolicitudIngreso.txtAge);
+		this.fields.add(this.registerSolicitudIngreso.txtAddress);
+		this.fields.add(this.registerSolicitudIngreso.txtBirthLocation);
+		this.fields.add(this.registerSolicitudIngreso.txtEmail);
+		this.fields.add(this.registerSolicitudIngreso.txtContact);
 	}
 
 
@@ -152,7 +182,6 @@ public class SolicitudIngresoController implements ActionListener{
 		});
 	}
 
-
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -184,52 +213,55 @@ public class SolicitudIngresoController implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.registerSolicitudIngreso.btnRegister) {
 			if(JOptionPane.showConfirmDialog(null, "Confirmación de generación de ficha","Confirmación",JOptionPane.YES_NO_OPTION)==0) {
-				try {
-					String names= this.registerSolicitudIngreso.txtNames.getText();
-					
-					String lastName=this.registerSolicitudIngreso.txtLastaName.getText();
-					
-					String secondLastname=this.registerSolicitudIngreso.txtSecondLastName.getText();
-					
-					String curp= this.registerSolicitudIngreso.txtCurp.getText();
-					
-					String address=this.registerSolicitudIngreso.txtAddress.getText();
-					
-					String email=this.registerSolicitudIngreso.txtEmail.getText();
-					
-					String op1= this.registerSolicitudIngreso.comboSpecialty.getSelectedItem().toString();
-					
-					String op2= this.registerSolicitudIngreso.comboSpecialty2.getSelectedItem().toString();
-					
-					String actualResidencia= this.registerSolicitudIngreso.comboResidencia.getSelectedItem().toString();
-					
-					String optionalNote=this.registerSolicitudIngreso.textArea.getText();
-					
-					String contact=this.registerSolicitudIngreso.txtContact.getText();
-					
-					String birthPlace= this.registerSolicitudIngreso.txtBirthLocation.getText();
-					
-					int age= Integer.parseInt(this.registerSolicitudIngreso.txtAge.getText());
-					
-					String selectedCombo= this.registerSolicitudIngreso.comboLanguaje.getSelectedItem().toString();
-					String lenguaje= selectedCombo.equals("Si")? this.registerSolicitudIngreso.comboDetails.getSelectedItem().toString() : "Ninguno";
-					
-					selectedCombo=this.registerSolicitudIngreso.comboDiscapacidad.getSelectedItem().toString();
-					String disability= selectedCombo.equals("Si")? this.registerSolicitudIngreso.comboDetailsDisability.getSelectedItem().toString() : "Ninguno";
-					
-					String kindSchool= this.registerSolicitudIngreso.comboSchoolType.getSelectedItem().toString();
-					/*
-					 * String names, String lastName, String secondLastName, Integer age, String curp, String address, String birthPlace, String op1Especilty, String op2Especilty, String contact, String languaje, String disability, String kindSchool*/
-					PdfCreator pdfCreator= new PdfCreator(names, lastName, secondLastname, age, curp, actualResidencia, address, birthPlace, op1, op2, email,contact, lenguaje, disability, kindSchool,optionalNote);
+				if(validateEmptyFields()){
+					try {
+						String names= this.registerSolicitudIngreso.txtNames.getText();
+						
+						String lastName=this.registerSolicitudIngreso.txtLastaName.getText();
+						
+						String secondLastname=this.registerSolicitudIngreso.txtSecondLastName.getText();
+						
+						String curp= this.registerSolicitudIngreso.txtCurp.getText();
+						
+						String address=this.registerSolicitudIngreso.txtAddress.getText();
+						
+						String email=this.registerSolicitudIngreso.txtEmail.getText();
+						
+						String op1= this.registerSolicitudIngreso.comboSpecialty.getSelectedItem().toString();
+						
+						String op2= this.registerSolicitudIngreso.comboSpecialty2.getSelectedItem().toString();
+						
+						String actualResidencia= this.registerSolicitudIngreso.comboResidencia.getSelectedItem().toString();
+						
+						String optionalNote=this.registerSolicitudIngreso.textArea.getText();
+						
+						String contact=this.registerSolicitudIngreso.txtContact.getText();
+						
+						String birthPlace= this.registerSolicitudIngreso.txtBirthLocation.getText();
+						
+						int age= Integer.parseInt(this.registerSolicitudIngreso.txtAge.getText());
+						
+						String selectedCombo= this.registerSolicitudIngreso.comboLanguaje.getSelectedItem().toString();
+						String lenguaje= selectedCombo.equals("Si")? this.registerSolicitudIngreso.comboDetails.getSelectedItem().toString() : "Ninguno";
+						
+						selectedCombo=this.registerSolicitudIngreso.comboDiscapacidad.getSelectedItem().toString();
+						String disability= selectedCombo.equals("Si")? this.registerSolicitudIngreso.comboDetailsDisability.getSelectedItem().toString() : "Ninguno";
+						
+						String kindSchool= this.registerSolicitudIngreso.comboSchoolType.getSelectedItem().toString();
+						/*
+						 * String names, String lastName, String secondLastName, Integer age, String curp, String address, String birthPlace, String op1Especilty, String op2Especilty, String contact, String languaje, String disability, String kindSchool*/
+						PdfCreator pdfCreator= new PdfCreator(names, lastName, secondLastname, age, curp, actualResidencia, address, birthPlace, op1, op2, email,contact, lenguaje, disability, kindSchool,optionalNote);
 
-					if(pdfCreator.createFicha(actualYear)) JOptionPane.showMessageDialog(null, "¡Ficha de "+lastName+" "+secondLastname+" "+names+" creado exitosamente!","Elija una opción",JOptionPane.YES_NO_OPTION);
-					else JOptionPane.showMessageDialog(null, "Algo ocurrió en el proceso","Error",2);
-					
-				} catch (NumberFormatException exception) {
-					// TODO: handle exception
-					JOptionPane.showMessageDialog(null, "La edad no corresponde a un valor numérico","Error",2);	
-					logger.log(Level.WARNING,"Error al parsear la edad {0}",exception);
+						if(pdfCreator.createFicha(actualYear)) JOptionPane.showMessageDialog(null, "¡Ficha de "+lastName+" "+secondLastname+" "+names+" creado exitosamente!","Elija una opción",JOptionPane.YES_NO_OPTION);
+						else JOptionPane.showMessageDialog(null, "Algo ocurrió en el proceso","Error",2);
+						
+					} catch (NumberFormatException exception) {
+						// TODO: handle exception
+						JOptionPane.showMessageDialog(null, "La edad no corresponde a un valor numérico","Error",2);	
+						logger.log(Level.WARNING,"Error al parsear la edad {0}",exception);
+					}
 				}
+				
 			}
 		}
 		

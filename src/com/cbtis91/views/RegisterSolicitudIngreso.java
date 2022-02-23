@@ -101,6 +101,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 		panel.add(lblNombres);
 
 		txtNames = new JTextField();
+		txtNames.setName("Nombre");
 		txtNames.setBounds(225, 35, 235, 19);
 		panel.add(txtNames);
 		txtNames.setColumns(10);
@@ -110,6 +111,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 		panel.add(lblApellidoPaterno);
 
 		txtLastaName = new JTextField();
+		txtLastaName.setName("Apellido paterno");
 		txtLastaName.setBounds(225, 99, 235, 19);
 		panel.add(txtLastaName);
 		txtLastaName.setColumns(10);
@@ -119,6 +121,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 		panel.add(lblApellidoMaterno);
 
 		txtSecondLastName = new JTextField();
+		txtSecondLastName.setName("Apellido materno");
 		txtSecondLastName.setBounds(225, 154, 235, 19);
 		panel.add(txtSecondLastName);
 		txtSecondLastName.setColumns(10);
@@ -128,6 +131,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 		panel.add(lblEdad);
 
 		txtAge = new JTextField();
+		txtAge.setName("Edad");
 		txtAge.setBounds(225, 216, 235, 19);
 		panel.add(txtAge);
 		txtAge.setColumns(10);
@@ -137,6 +141,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 		panel.add(lblCurp);
 
 		txtCurp = new JTextField();
+		txtCurp.setName("CURP");
 		txtCurp.setBounds(225, 287, 235, 19);
 		panel.add(txtCurp);
 		txtCurp.setColumns(10);
@@ -146,6 +151,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 		panel.add(lblDireccin);
 
 		txtAddress = new JTextField();
+		txtAddress.setName("Dirección");
 		txtAddress.setBounds(225, 420, 235, 19);
 		panel.add(txtAddress);
 		txtAddress.setColumns(10);
@@ -185,6 +191,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 		panel.add(lblCorreoElectrnico);
 
 		txtEmail = new JTextField();
+		txtEmail.setName("required7");
 		txtEmail.setBounds(880, 24, 217, 19);
 		panel.add(txtEmail);
 		txtEmail.setColumns(10);
@@ -194,6 +201,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 		panel.add(lblNmeroDeTelfono);
 
 		txtContact = new JTextField();
+		txtContact.setName("Número de contacto");
 		txtContact.setBounds(880, 80, 217, 19);
 		panel.add(txtContact);
 		txtContact.setColumns(10);
@@ -252,6 +260,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 		panel.add(lblLugarDeNacimiento);
 
 		txtBirthLocation = new JTextField();
+		txtBirthLocation.setName("Lugar de nacimiento");
 		txtBirthLocation.setBounds(225, 487, 235, 19);
 		panel.add(txtBirthLocation);
 		txtBirthLocation.setColumns(10);
