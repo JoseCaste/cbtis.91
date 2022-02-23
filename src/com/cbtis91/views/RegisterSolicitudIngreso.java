@@ -55,6 +55,8 @@ public class RegisterSolicitudIngreso extends JFrame{
 	public JButton btnRegister;
 	public JComboBox comboResidencia;
 	public JTextArea textArea;
+	public JMenuItem mntmAgregarNota;
+	public JMenuItem mntmReinciarNmeroDe;
 
 	/**
 	 * Launch the application.
@@ -365,10 +367,10 @@ public class RegisterSolicitudIngreso extends JFrame{
 	    JMenu elementMenu = new JMenu("Ayuda"); // Create Elements menu
 	    menuBar.add(fileMenu); // Add the file menu
 	    
-	    JMenuItem mntmAgregarNota = new JMenuItem("Agregar nota");
+	    mntmAgregarNota = new JMenuItem("Agregar nota");
 	    fileMenu.add(mntmAgregarNota);
 	    
-	    JMenuItem mntmReinciarNmeroDe = new JMenuItem("Reinciar número de ficha");
+	    mntmReinciarNmeroDe = new JMenuItem("Reinciar número de ficha");
 	    fileMenu.add(mntmReinciarNmeroDe);
 	    menuBar.add(elementMenu); // Add the element menu
 	    
