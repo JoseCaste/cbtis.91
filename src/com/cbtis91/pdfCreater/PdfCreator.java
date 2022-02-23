@@ -2,7 +2,10 @@ package com.cbtis91.pdfCreater;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import com.cbtis91.controller.SolicitudIngresoController;
 import com.cbtis91.dao.DAOFicha;
 import com.cbtis91.models.Ficha;
 import com.itextpdf.io.font.constants.StandardFonts;
@@ -12,9 +15,12 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.canvas.draw.SolidLine;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.LineSeparator;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.property.UnitValue;
 
 import lombok.Data;
 
@@ -40,6 +46,7 @@ public class PdfCreator {
 	private String kindSchool;
 	private String optionalNote;
 	private DAOFicha daoFicha;
+	private static final Logger logger= Logger.getLogger(SolicitudIngresoController.class.getName());
 	
 	public PdfCreator(String names, String lastName, String secondLastName, Integer age, String curp, String actualResidencia,String address,
 			String birthPlace, String op1Especilty, String op2Especilty, String email,String contact, String languaje,
@@ -75,47 +82,15 @@ public class PdfCreator {
 	        
 	        Document document = new Document(pdf);
 
-	        PdfFont font= PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD);
-	        document.add(new Paragraph("SECRETARIA DE EDUCACIÓN PÚBLICA").setTextAlignment(TextAlignment.CENTER).setFont(font).setFontSize(9).setFixedLeading(1));
-	        document.add(new Paragraph("SUBSECRETARÍA DE EDUCACIÓN MEDIA SUPERIOR").setTextAlignment(TextAlignment.CENTER).setFont(font).setFontSize(9));
-	        document.add(new Paragraph("DIRECCIÓN GENERAL DE EDUCACIÓN TECNOLÓGICA industrial y de servicios").setFont(font).setTextAlignment(TextAlignment.CENTER).setFontSize(9).setFixedLeading(1));
-	        document.add(new Paragraph("CENTRO DE BACHILLERATO TECNOLÓGICO industrial y de servicios No. 91").setFont(font).setTextAlignment(TextAlignment.CENTER).setFontSize(9));
-	        
-	        document.add(new Paragraph(" "));
-	        
-	        document.add(new Paragraph(String.format("FICHA DE INGRESO %d", actualYear)).setFont(font).setTextAlignment(TextAlignment.CENTER).setFontSize(9).setUnderline());
-	        
-	        final String numeroFichaReformat=(numeroFicha < 10 ? String.format("00%d", numeroFicha): numeroFicha>99? String.format("%d", numeroFicha):String.format("0%d", numeroFicha));
-	        
-	        document.add(new Paragraph(String.format("No. de FICHA: %s", numeroFichaReformat)).setTextAlignment(TextAlignment.RIGHT).setFont(font).setFontSize(9));
-	        document.add(new Paragraph(" "));
-	        document.add(new Paragraph(" "));
-	        document.add(new Paragraph(" "));
-	        document.add(new Paragraph(" "));
-	        document.add(new Paragraph(String.format("NOMBRE DEL ALUMNO: %s %s %s", this.lastName,this.secondLastName,this.names)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        document.add(new Paragraph(String.format("CURP: %s", this.curp)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        document.add(new Paragraph(String.format("TELEFONO: %s", this.contact)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        document.add(new Paragraph(String.format("CORREO ELECTRÓNICO: %s", this.email)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        document.add(new Paragraph(String.format("LUGAR DE NACIEMIENTO: %s", this.birthPlace)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        document.add(new Paragraph(String.format("OPCION 1 DE ESPECIALIDAD : %s", this.op1Especilty)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        document.add(new Paragraph(String.format("OPCION 2 DE ESPECIALIDAD : %s", this.op2Especilty)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        
-	        document.add(new Paragraph(" "));
-	        
-	        document.add(new Paragraph(String.format("NOTA: %s", this.optionalNote)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        
-	        //Duplicando los mismos datos, uno para el alumno y otro para la administración
-	        
-	        document.add(new Paragraph(" "));
-	        
-	        drawLine(document);
+	        loadPdf(document, numeroFicha, actualYear);
 	        
 	        document.add(new Paragraph(" "));
 	        document.add(new Paragraph(" "));
 	        document.add(new Paragraph(" "));
 	        document.add(new Paragraph(" "));
 	        
-	        document.add(new Paragraph("SECRETARIA DE EDUCACIÓN PÚBLICA").setTextAlignment(TextAlignment.CENTER).setFont(font).setFontSize(9).setFixedLeading(1));
+	        loadPdf(document, numeroFicha, actualYear);
+	        /*document.add(new Paragraph("SECRETARIA DE EDUCACIÓN PÚBLICA").setTextAlignment(TextAlignment.CENTER).setFont(font).setFontSize(9).setFixedLeading(1));
 	        document.add(new Paragraph("SUBSECRETARÍA DE EDUCACIÓN MEDIA SUPERIOR").setTextAlignment(TextAlignment.CENTER).setFont(font).setFontSize(9));
 	        document.add(new Paragraph("DIRECCIÓN GENERAL DE EDUCACIÓN TECNOLÓGICA industrial y de servicios").setFont(font).setTextAlignment(TextAlignment.CENTER).setFontSize(9).setFixedLeading(1));
 	        document.add(new Paragraph("CENTRO DE BACHILLERATO TECNOLÓGICO industrial y de servicios No. 91").setFont(font).setTextAlignment(TextAlignment.CENTER).setFontSize(9));
@@ -141,7 +116,7 @@ public class PdfCreator {
 	        
 	        document.add(new Paragraph(" "));
 	        
-	        document.add(new Paragraph(String.format("NOTA: %s", this.optionalNote)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
+	        document.add(new Paragraph(String.format("NOTA: %s", this.optionalNote)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));*/
 	        
 	        document.close();
 			return true;
@@ -151,7 +126,76 @@ public class PdfCreator {
 			return false;
 		}		
 	}
-	private static void drawLine(Document document) {
+	private void loadPdf(Document document, int numeroFicha, int actualYear) {
+		try {
+			PdfFont font= PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD);
+	        document.add(new Paragraph("SECRETARIA DE EDUCACIÓN PÚBLICA").setTextAlignment(TextAlignment.CENTER).setFont(font).setFontSize(9).setFixedLeading(1));
+	        document.add(new Paragraph("SUBSECRETARÍA DE EDUCACIÓN MEDIA SUPERIOR").setTextAlignment(TextAlignment.CENTER).setFont(font).setFontSize(9));
+	        document.add(new Paragraph("DIRECCIÓN GENERAL DE EDUCACIÓN TECNOLÓGICA industrial y de servicios").setFont(font).setTextAlignment(TextAlignment.CENTER).setFontSize(9).setFixedLeading(1));
+	        document.add(new Paragraph("CENTRO DE BACHILLERATO TECNOLÓGICO industrial y de servicios No. 91").setFont(font).setTextAlignment(TextAlignment.CENTER).setFontSize(9));
+	        
+	        document.add(new Paragraph(" "));
+	        
+	        document.add(new Paragraph(String.format("FICHA DE INGRESO %d", actualYear)).setFont(font).setTextAlignment(TextAlignment.CENTER).setFontSize(9).setUnderline());
+	        
+	        final String numeroFichaReformat=(numeroFicha < 10 ? String.format("00%d", numeroFicha): numeroFicha>99? String.format("%d", numeroFicha):String.format("0%d", numeroFicha));
+	        
+	        document.add(new Paragraph(String.format("No. de FICHA: %s", numeroFichaReformat)).setTextAlignment(TextAlignment.RIGHT).setFont(font).setFontSize(9));
+	        document.add(new Paragraph(" "));
+	        document.add(new Paragraph(" "));
+	        document.add(new Paragraph(" "));
+	        document.add(new Paragraph(" "));
+	        
+	        Table table= new Table(UnitValue.createPercentArray(new float[]{15f, 20f}));
+	        //table.setHeight(2f);
+	        table.addCell(createCell("NOMBRE DEL ALUMNO: ").setFont(font));
+	        table.addCell(createCellUnderline(String.format("%s %s %s", this.lastName,this.secondLastName,this.names)).setUnderline());
+	        
+	        table.addCell(createCell("CORREO ELECTRÓNICO: ").setFont(font));
+	        table.addCell(createCellUnderline(this.email));
+	        
+	        table.addCell(createCell("LUGAR DE NACIMIENTO: ").setFont(font));
+	        table.addCell(createCellUnderline(this.birthPlace));
+	        
+	        table.addCell(createCell("OPCION 1 DE ESPECIALIDAD").setFont(font));
+	        table.addCell(createCellUnderline(this.op1Especilty));
+	        
+	        table.addCell(createCell("OPCION 2 DE ESPECIALIDAD").setFont(font));
+	        table.addCell(createCellUnderline(this.op2Especilty));
+	        
+	        document.add(table);
+	        
+	        /*document.add(new Paragraph(String.format("NOMBRE DEL ALUMNO: %s %s %s", this.lastName,this.secondLastName,this.names)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
+	        document.add(new Paragraph(String.format("CURP: %s", this.curp)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
+	        document.add(new Paragraph(String.format("TELEFONO: %s", this.contact)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
+	        document.add(new Paragraph(String.format("CORREO ELECTRÓNICO: %s", this.email)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
+	        document.add(new Paragraph(String.format("LUGAR DE NACIEMIENTO: %s", this.birthPlace)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
+	        document.add(new Paragraph(String.format("OPCION 1 DE ESPECIALIDAD : %s", this.op1Especilty)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
+	        document.add(new Paragraph(String.format("OPCION 2 DE ESPECIALIDAD : %s", this.op2Especilty)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
+	        
+	        document.add(new Paragraph(" "));*/
+	        
+	        document.add(new Paragraph(String.format("NOTA: %s", this.optionalNote)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
+
+	        
+	        drawLine(document);	
+		} catch (Exception e) {
+			logger.log(Level.WARNING,"Error al crear el pdf ",e);
+		}
+	}
+	public static Cell createCell(String text) {
+		Cell cell= new Cell();
+		cell.add(new Paragraph(text).setPaddingLeft(48).setFontSize(9));
+		cell.setBorder(null);
+		return cell;
+	}
+	public static Cell createCellUnderline(String text) {
+		Cell cell= new Cell();
+		cell.add(new Paragraph(text).setFontSize(9));
+		cell.setBorder(null);
+		return cell;
+	}
+	private void drawLine(Document document) {
 		SolidLine line = new SolidLine(1f);
 		//line.setColor(P);
 		LineSeparator ls = new LineSeparator(line);

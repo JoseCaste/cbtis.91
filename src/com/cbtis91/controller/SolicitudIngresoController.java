@@ -47,6 +47,20 @@ public class SolicitudIngresoController implements ActionListener{
 		this.actualYear=LocalDate.now().getYear();
 		loadComboBoxesResources();
 		loadListerners();
+		loadMenuListerners();
+	}
+
+
+	private void loadMenuListerners() {
+		this.registerSolicitudIngreso.mntmAgregarNota.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				final String nota = JOptionPane.showInputDialog("Ingrese la nota");
+				registerSolicitudIngreso.textArea.setText(nota);
+				
+			}
+		});
 	}
 
 
