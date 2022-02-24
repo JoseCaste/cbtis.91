@@ -3,6 +3,8 @@ package com.cbtis91.excelCreator;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -35,14 +37,14 @@ public class ExcelCreator {
 		// creating a row object
 		XSSFRow row;
 		
-		Map<String, Object[]> fichaData = new TreeMap<String, Object[]>();
+		Map<Integer, Object[]> fichaData = new HashMap<>();
 
-		fichaData.put("0",
+		fichaData.put(0,
 				new Object[] { "# Ficha", "Nombres", "Apellidos", "Edad", "CURP", "Residencia actual", "Dirección",
 						"Lugar de nacimiento", "Opción 1 especialidad", "Opción 2 especialidad", "Correo electrónico",
-						"Número de teléfono", "Lengua", "Discapacidad", "Tipo de secundaria" });
+						"Número de teléfono", "Lengua", "Discapacidad", "Tipo de secundaria", "Fecha de emisión" });
 		for (int i = 0; i < excelMetaDatas.size(); i++) {
-			Object [] valueFichaData= new Object[15];
+			Object [] valueFichaData= new Object[16];
 			final ExcelMetaData metadata_= excelMetaDatas.get(i);
 			
 			valueFichaData[0]= metadata_.getNumeroFicha();
@@ -60,15 +62,16 @@ public class ExcelCreator {
 			valueFichaData[12]= metadata_.getLanguaje();
 			valueFichaData[13]= metadata_.getDisability();
 			valueFichaData[14]= metadata_.getKindSchool();
-			fichaData.put(String.format("%d", i+1), valueFichaData);
+			valueFichaData[15]= metadata_.getDateCreated();
+			fichaData.put(i+1, valueFichaData);
 		}
-		Set<String> keyid = fichaData.keySet();
+		Set<Integer> keyid = fichaData.keySet();
 		  
         int rowid = 0;
   
         // writing the data into the sheets...
   
-        for (String key : keyid) {
+        for (int key : keyid) {
   
             row = spreadsheet.createRow(rowid++);
             Object[] objectArr = fichaData.get(key);
@@ -78,9 +81,11 @@ public class ExcelCreator {
                 Cell cell = row.createCell(cellid++);
                 //cell.setCellValue((String)obj);
                 if(obj instanceof Integer) 
-                	cell.setCellValue(String.format("%d", obj));
-                else
+                	cell.setCellValue((int)obj);
+                else if (obj instanceof String)
                 	cell.setCellValue((String)obj);
+                else if (obj instanceof Date)
+                	cell.setCellValue(((Date)obj).toString());
             }
         }
         

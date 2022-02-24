@@ -1,6 +1,7 @@
 package com.cbtis91.dao;
 
 import java.sql.CallableStatement;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -142,7 +143,7 @@ public class DAOFicha implements IDAOcrud<Ficha> {
 	public List<ExcelMetaData> getAllCustomQuery(){
 		List<ExcelMetaData> excelMetaDatas= new ArrayList<>();
 		try {
-			this.resultSet=this.statement.executeQuery("SELECT f.numero_ficha, f.nombres , f.apellido_paterno ,f.apellido_materno ,f.curp ,f.numero_telefono ,f.correo_electronico ,f.op1_especialidad ,f.op2_especialidad ,l.nombre_lengua ,d.nombre_discapacidad, f.kind_school , f.edad , loc.nombre_localidad, f.birth_place , f.direccion from ficha f  inner join discapacidad d inner join lengua l inner join localidades loc where f.fk_id_localidad = loc.id_localidad and f.fk_id_discapacidad = d.id_discapacidad and l.id_lengua = f.fk_id_lengua ORDER BY f.numero_ficha;");
+			this.resultSet=this.statement.executeQuery("SELECT f.numero_ficha, f.nombres , f.apellido_paterno ,f.apellido_materno ,f.curp ,f.numero_telefono ,f.correo_electronico ,f.op1_especialidad ,f.op2_especialidad ,l.nombre_lengua ,d.nombre_discapacidad, f.kind_school , f.edad , loc.nombre_localidad, f.birth_place , f.direccion, f.date_created from ficha f  inner join discapacidad d inner join lengua l inner join localidades loc where f.fk_id_localidad = loc.id_localidad and f.fk_id_discapacidad = d.id_discapacidad and l.id_lengua = f.fk_id_lengua ORDER BY f.id_ficha;");
 			while(this.resultSet.next()) {
 				//"# Ficha", "Nombres", "Apellidos","Edad","CURP","Residencia actual","Dirección","Lugar de nacimiento","Opción 1 especialidad","Opción 2 especialidad","Correo electrónico","Número de teléfono","Lengua","Discapacidad","Tipo de secundaria"
 				final int numeroFicha= this.resultSet.getInt("numero_ficha");
@@ -160,10 +161,11 @@ public class DAOFicha implements IDAOcrud<Ficha> {
 				final String birthPlace= this.resultSet.getString("birth_place");
 				final String address= this.resultSet.getString("direccion");
 				final String locality= this.resultSet.getString("nombre_localidad");
+				final Date dateCreated= this.resultSet.getDate("date_created");
 				
 				final Especialidad op1= this.daoEspecialidad.getById(op1_especialidad);
 				final Especialidad op2= this.daoEspecialidad.getById(op2_especialidad);
-				excelMetaDatas.add( new ExcelMetaData(numeroFicha,names, lastNames, curp, contact, email, languaje, disability, kindSchool, age, birthPlace, address, op1, op2,locality));
+				excelMetaDatas.add( new ExcelMetaData(numeroFicha,names, lastNames, curp, contact, email, languaje, disability, kindSchool, age, birthPlace, address, op1, op2,locality,dateCreated));
 			}
 			return excelMetaDatas;
 		} catch (SQLException e) {

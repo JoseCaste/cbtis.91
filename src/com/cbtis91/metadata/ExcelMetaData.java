@@ -1,5 +1,7 @@
 package com.cbtis91.metadata;
 
+import java.sql.Date;
+
 import com.cbtis91.models.Especialidad;
 
 import lombok.AllArgsConstructor;
@@ -38,4 +40,6 @@ public class ExcelMetaData {
 	private Especialidad op2;
 	
 	private String locality;
+	
+	private Date dateCreated;
 }
