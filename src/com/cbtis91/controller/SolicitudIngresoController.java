@@ -20,6 +20,7 @@ import com.cbtis91.dao.DAOEspecialidad;
 import com.cbtis91.dao.DAOFicha;
 import com.cbtis91.dao.DAOLengua;
 import com.cbtis91.dao.DAOLocalidades;
+import com.cbtis91.excelCreator.ExcelCreator;
 import com.cbtis91.models.Discapacidad;
 import com.cbtis91.models.Especialidad;
 import com.cbtis91.models.Lengua;
@@ -103,6 +104,22 @@ public class SolicitudIngresoController implements ActionListener{
 						JOptionPane.showMessageDialog(null, "Número de fichas reiniciado con éxito","Realizado",JOptionPane.YES_OPTION);
 					else 
 						JOptionPane.showMessageDialog(null, "No se pudo reiniciar el número de ficha","Error",JOptionPane.YES_OPTION);
+				}
+			}
+		});
+		this.registerSolicitudIngreso.mntmExportarFichas.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				final int op= JOptionPane.showConfirmDialog(null,"Confirmación de exportación de excel","Confirmar",JOptionPane.YES_NO_OPTION); 
+				if(op==0) {
+					
+					if(new ExcelCreator(daoFicha.getAllCustomQuery()).createExcelReport()) 
+						
+						JOptionPane.showMessageDialog(null, "Reporte creado exitosamente");
+					else
+						
+						JOptionPane.showMessageDialog(null, "No se ha creado el reporte","Error",2);
 				}
 			}
 		});

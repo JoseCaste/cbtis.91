@@ -70,8 +70,23 @@ public class DAOEspecialidad implements IDAOcrud<Especialidad> {
 			
 			return null;
 		}
-		 
-		
+	}
+	public Especialidad getById(int id) {
+		try {
+			this.statement= this.connectionDB.getCon().createStatement();
+			this.resultSet= this.statement.executeQuery(String.format("SELECT * FROM especialidad e WHERE e.id_especialidad = %d", id));
+				if(this.resultSet.next())
+				
+					return new Especialidad(this.resultSet.getInt("id_especialidad"),this.resultSet.getString("nombre_especialidad"));
+				
+				else return null;
+		} catch (Exception e) {
+			logger.log(Level.WARNING,"Error al recuperar datos de la tabla especialidad {0}",e);
+			
+			JOptionPane.showMessageDialog(null, "Error al recuperar datos de la especialidad","Error",2);
+			
+			return null;
+		}
 	}
 
 }

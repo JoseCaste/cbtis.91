@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +14,7 @@ import javax.swing.JOptionPane;
 
 import com.cbtis91.databases_items.ConnectionDB;
 import com.cbtis91.interfaces.IDAOcrud;
+import com.cbtis91.metadata.ExcelMetaData;
 import com.cbtis91.models.Discapacidad;
 import com.cbtis91.models.Especialidad;
 import com.cbtis91.models.Ficha;
@@ -134,8 +136,42 @@ public class DAOFicha implements IDAOcrud<Ficha> {
 
 	@Override
 	public List<Ficha> getAll() {
-		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public List<ExcelMetaData> getAllCustomQuery(){
+		List<ExcelMetaData> excelMetaDatas= new ArrayList<>();
+		try {
+			this.resultSet=this.statement.executeQuery("SELECT f.numero_ficha, f.nombres , f.apellido_paterno ,f.apellido_materno ,f.curp ,f.numero_telefono ,f.correo_electronico ,f.op1_especialidad ,f.op2_especialidad ,l.nombre_lengua ,d.nombre_discapacidad, f.kind_school , f.edad , loc.nombre_localidad, f.birth_place , f.direccion from ficha f  inner join discapacidad d inner join lengua l inner join localidades loc where f.fk_id_localidad = loc.id_localidad and f.fk_id_discapacidad = d.id_discapacidad and l.id_lengua = f.fk_id_lengua ORDER BY f.numero_ficha;");
+			while(this.resultSet.next()) {
+				//"# Ficha", "Nombres", "Apellidos","Edad","CURP","Residencia actual","Dirección","Lugar de nacimiento","Opción 1 especialidad","Opción 2 especialidad","Correo electrónico","Número de teléfono","Lengua","Discapacidad","Tipo de secundaria"
+				final int numeroFicha= this.resultSet.getInt("numero_ficha");
+				final String names= this.resultSet.getString("nombres");
+				final String lastNames=this.resultSet.getString("apellido_paterno")+" "+this.resultSet.getString("apellido_materno");
+				final String curp= this.resultSet.getString("curp");
+				final String contact= this.resultSet.getString("numero_telefono");
+				final String email= this.resultSet.getString("correo_electronico");
+				final int op1_especialidad= this.resultSet.getInt("op1_especialidad");
+				final int op2_especialidad= this.resultSet.getInt("op2_especialidad");
+				final String languaje= this.resultSet.getString("nombre_lengua");
+				final String disability= this.resultSet.getString("nombre_discapacidad");
+				final String kindSchool= this.resultSet.getString("kind_school");
+				final int age= this.resultSet.getInt("edad");
+				final String birthPlace= this.resultSet.getString("birth_place");
+				final String address= this.resultSet.getString("direccion");
+				final String locality= this.resultSet.getString("nombre_localidad");
+				
+				final Especialidad op1= this.daoEspecialidad.getById(op1_especialidad);
+				final Especialidad op2= this.daoEspecialidad.getById(op2_especialidad);
+				excelMetaDatas.add( new ExcelMetaData(numeroFicha,names, lastNames, curp, contact, email, languaje, disability, kindSchool, age, birthPlace, address, op1, op2,locality));
+			}
+			return excelMetaDatas;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			logger.log(Level.WARNING,"Error al recupera datos para generar el reporte excel ",e);
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override

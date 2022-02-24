@@ -57,6 +57,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 	public JTextArea textArea;
 	public JMenuItem mntmAgregarNota;
 	public JMenuItem mntmReinciarNmeroDe;
+	public JMenuItem mntmExportarFichas;
 
 	/**
 	 * Launch the application.
@@ -381,6 +382,9 @@ public class RegisterSolicitudIngreso extends JFrame{
 	    
 	    mntmReinciarNmeroDe = new JMenuItem("Reinciar número de ficha");
 	    fileMenu.add(mntmReinciarNmeroDe);
+	    
+	    mntmExportarFichas = new JMenuItem("Exportar fichas generadas");
+	    fileMenu.add(mntmExportarFichas);
 	    menuBar.add(elementMenu); // Add the element menu
 	    
 	    setJMenuBar(menuBar);

@@ -8,7 +8,7 @@ SELECT * from lengua l ;
 SELECT * from discapacidad d ;
 SELECT * from localidades l ;
 SELECT * from numeroFicha nf ;
-update numeroFicha set numero_ficha=1 where id_numero_ficha =1;
+update numeroFicha set numero_ficha=99 where id_numero_ficha =1;
 insert into lengua (nombre_lengua) values ('Ninguno');
 SET @numFicha := (SELECT numero_ficha from numeroFicha nf)+1;
 SELECT  @numFicha;
@@ -43,4 +43,7 @@ SELECT numero_ficha from numeroFicha nf;
 insert into localidades (nombre_localidad) values('CD. IXTEPEC'),('IXTALTEPEC'),('EL ESPINAL'),('H. CD. DE JUCHITÁN'),('LA VENTOSA'),('LA VENTA'),('UNIÓN HIDALGO'),('STO. DOMINGO INGENIO'),
 ('STGO IXTALTEPEC'),('SANTA MARÍA XADANI'),('CHIHUITÁN'),('LAOLLAGA'),('TLACOTEPEC'),('TEHUANTEPEC'),('COMITANCILLO'),('SANTA MARÍA GUIENAGATI'),('GUEVEA DE HUMBULT'),('LACHIVIZA'),('GUICHIXÚ');
 
-DELETE from ficha where id_ficha =4;
+DELETE from ficha where;
+
+SELECT f.id_ficha, f.nombres , f.apellido_paterno ,f.apellido_materno ,f.curp ,f.numero_telefono ,f.correo_electronico ,f.op1_especialidad ,f.op2_especialidad ,l.nombre_lengua ,d.nombre_discapacidad, f.kind_school , f.edad , loc.nombre_localidad, f.birth_place , f.direccion ,d.nombre_discapacidad from ficha f  inner join discapacidad d inner join lengua l inner join localidades loc where f.fk_id_localidad = loc.id_localidad and f.fk_id_discapacidad = d.id_discapacidad and l.id_lengua = f.fk_id_lengua;
+SELECT f.numero_ficha , f.nombres , f.apellido_paterno ,f.apellido_materno ,f.curp ,f.numero_telefono ,f.correo_electronico ,f.op1_especialidad ,f.op2_especialidad ,l.nombre_lengua ,d.nombre_discapacidad, f.kind_school , f.edad , loc.nombre_localidad, f.birth_place , f.direccion from ficha f  inner join discapacidad d inner join lengua l inner join localidades loc where f.fk_id_localidad = loc.id_localidad and f.fk_id_discapacidad = d.id_discapacidad and l.id_lengua = f.fk_id_lengua ORDER BY f.numero_ficha ;
