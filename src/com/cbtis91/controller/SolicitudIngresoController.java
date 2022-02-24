@@ -116,7 +116,7 @@ public class SolicitudIngresoController implements ActionListener{
 				int op1= JOptionPane.showConfirmDialog(null, "Confirmación de reinicio de número de fichas","Advertencia",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
 				if(op1 == 0) {
 					if(daoFicha.resetNumberFichaCounter())
-						JOptionPane.showMessageDialog(null, "Número de fichas reiniciado con éxito","Realizado",JOptionPane.YES_OPTION);
+						JOptionPane.showMessageDialog(null, "Número de fichas reiniciado con éxito");
 					else 
 						JOptionPane.showMessageDialog(null, "No se pudo reiniciar el número de ficha","Error",JOptionPane.YES_OPTION);
 				}

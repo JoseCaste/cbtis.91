@@ -7,6 +7,7 @@ select * from especialidad e ;
 SELECT * from lengua l ;
 SELECT * from discapacidad d ;
 SELECT * from localidades l ;
+INSERT  INTO localidades (nombre_localidad) VALUES ('nUEVO CAMPO');
 SELECT * from numeroFicha nf ;
 update numeroFicha set numero_ficha=99 where id_numero_ficha =1;
 insert into lengua (nombre_lengua) values ('Ninguno');
@@ -26,6 +27,15 @@ BEGIN
 	
 	set numeroFicha_ = (SELECT numero_ficha from numeroFicha nf);
 	update numeroFicha nf set nf.numero_ficha =nf.numero_ficha +1 where id_numero_ficha =1;
+END //
+
+DELIMITER //
+CREATE PROCEDURE resetNumeroFicha(OUT flag boolean)
+BEGIN
+	UPDATE numeroFicha SET numero_ficha = 1 where id_numero_ficha=1;
+	DELETE FROM ficha;
+	ALTER TABLE ficha AUTO_INCREMENT = 0;
+	set flag = true;
 END //
 	
 set @flag=true;

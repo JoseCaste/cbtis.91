@@ -49,8 +49,12 @@ public class DAOFicha implements IDAOcrud<Ficha> {
 	public boolean resetNumberFichaCounter() {
 		try {
 			//this.statement= this.connectionDB.getCon().createStatement();
-			final int rowsUpdated= this.statement.executeUpdate("UPDATE numeroFicha SET numero_ficha = 1");
-			if(rowsUpdated>0)
+			//final int rowsUpdated= this.statement.executeUpdate("UPDATE numeroFicha SET numero_ficha = 1 where id_numero_ficha=1");
+			CallableStatement callableStatement= this.connectionDB.getCon().prepareCall("{call resetNumeroFicha(?)}");
+			callableStatement.registerOutParameter(1, Types.BOOLEAN);
+			callableStatement.execute();
+			
+			if(callableStatement.getBoolean(1))
 				return true;
 			else 
 				return false;
