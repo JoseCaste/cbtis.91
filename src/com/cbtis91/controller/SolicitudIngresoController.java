@@ -269,7 +269,7 @@ public class SolicitudIngresoController implements ActionListener{
 						 * String names, String lastName, String secondLastName, Integer age, String curp, String address, String birthPlace, String op1Especilty, String op2Especilty, String contact, String languaje, String disability, String kindSchool*/
 						PdfCreator pdfCreator= new PdfCreator(names, lastName, secondLastname, age, curp, actualResidencia, address, birthPlace, op1, op2, email,contact, lenguaje, disability, kindSchool,optionalNote);
 
-						if(pdfCreator.createFicha(actualYear)) JOptionPane.showMessageDialog(null, "¡Ficha de "+lastName+" "+secondLastname+" "+names+" creado exitosamente!","Elija una opción",JOptionPane.YES_NO_OPTION);
+						if(pdfCreator.createFicha(actualYear)) JOptionPane.showMessageDialog(null, "¡Ficha de "+lastName+" "+secondLastname+" "+names+" creado exitosamente!");
 						else JOptionPane.showMessageDialog(null, "Algo ocurrió en el proceso","Error",2);
 						
 					} catch (NumberFormatException exception) {
