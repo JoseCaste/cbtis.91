@@ -20,9 +20,9 @@ IN kind_school_ varchar(200), OUT numeroFicha_ int)
 BEGIN
 	
 	INSERT INTO ficha (numero_ficha, nombres, apellido_paterno, apellido_materno, curp, numero_telefono, correo_electronico, op1_especialidad, 
-	op2_especialidad, fk_id_lengua, fk_id_discapacidad, kind_school, edad, fk_id_localidad, birth_place, direccion) values 
+	op2_especialidad, fk_id_lengua, fk_id_discapacidad, kind_school, edad, fk_id_localidad, birth_place, direccion, date_created) values 
 	((SELECT numero_ficha from numeroFicha nf),nombres_,apellido_paterno_,apellido_materno_, curp_ , numero_telefono_ , correo_electronico_ ,op1_especialidad_ ,
-	op2_especialidad_ ,fk_id_lengua_ ,fk_id_discapacidad_ ,kind_school_,age_,fk_id_localidad_,birth_place_,address);
+	op2_especialidad_ ,fk_id_lengua_ ,fk_id_discapacidad_ ,kind_school_,age_,fk_id_localidad_,birth_place_,address, curdate());
 	
 	set numeroFicha_ = (SELECT numero_ficha from numeroFicha nf);
 	update numeroFicha nf set nf.numero_ficha =nf.numero_ficha +1 where id_numero_ficha =1;
@@ -46,4 +46,7 @@ insert into localidades (nombre_localidad) values('CD. IXTEPEC'),('IXTALTEPEC'),
 DELETE from ficha where;
 
 SELECT f.id_ficha, f.nombres , f.apellido_paterno ,f.apellido_materno ,f.curp ,f.numero_telefono ,f.correo_electronico ,f.op1_especialidad ,f.op2_especialidad ,l.nombre_lengua ,d.nombre_discapacidad, f.kind_school , f.edad , loc.nombre_localidad, f.birth_place , f.direccion ,d.nombre_discapacidad from ficha f  inner join discapacidad d inner join lengua l inner join localidades loc where f.fk_id_localidad = loc.id_localidad and f.fk_id_discapacidad = d.id_discapacidad and l.id_lengua = f.fk_id_lengua;
-SELECT f.numero_ficha , f.nombres , f.apellido_paterno ,f.apellido_materno ,f.curp ,f.numero_telefono ,f.correo_electronico ,f.op1_especialidad ,f.op2_especialidad ,l.nombre_lengua ,d.nombre_discapacidad, f.kind_school , f.edad , loc.nombre_localidad, f.birth_place , f.direccion from ficha f  inner join discapacidad d inner join lengua l inner join localidades loc where f.fk_id_localidad = loc.id_localidad and f.fk_id_discapacidad = d.id_discapacidad and l.id_lengua = f.fk_id_lengua ORDER BY f.numero_ficha ;
+SELECT f.numero_ficha , f.nombres , f.apellido_paterno ,f.apellido_materno ,f.curp ,f.numero_telefono ,f.correo_electronico ,f.op1_especialidad ,f.op2_especialidad ,l.nombre_lengua ,d.nombre_discapacidad, f.kind_school , f.edad , loc.nombre_localidad, f.birth_place , f.direccion, f.date_created  from ficha f  inner join discapacidad d inner join lengua l inner join localidades loc where f.fk_id_localidad = loc.id_localidad and f.fk_id_discapacidad = d.id_discapacidad and l.id_lengua = f.fk_id_lengua ORDER BY f.id_ficha ;
+
+update ficha set date_created = CURDATE() where id_ficha  = 31 ;
+select CURDATE(); 
