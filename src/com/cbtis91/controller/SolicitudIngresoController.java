@@ -1,5 +1,6 @@
 package com.cbtis91.controller;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -12,6 +13,8 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -27,6 +30,7 @@ import com.cbtis91.models.Lengua;
 import com.cbtis91.models.Localidad;
 import com.cbtis91.pdfCreater.PdfCreator;
 import com.cbtis91.views.RegisterSolicitudIngreso;
+import com.cbtis91.views.tab_order.CustomTravelPolicy;
 
 
 public class SolicitudIngresoController implements ActionListener{
@@ -56,6 +60,17 @@ public class SolicitudIngresoController implements ActionListener{
 		loadListerners();
 		loadMenuListerners();
 		loadFields();
+		setTabOrder();
+	}
+
+
+	private void setTabOrder() { //Asignando el orden de tab para saltar entre textfields
+		Vector<Component> vector= this.fields.stream().map(jtextField->{
+			return (Component)jtextField;
+		}).collect(Collectors.toCollection(Vector::new));
+		
+		CustomTravelPolicy customTravelPolicy= new CustomTravelPolicy(vector);
+		this.registerSolicitudIngreso.setFocusTraversalPolicy(customTravelPolicy);
 	}
 
 
@@ -75,8 +90,8 @@ public class SolicitudIngresoController implements ActionListener{
 		this.fields.add(this.registerSolicitudIngreso.txtNames);
 		this.fields.add(this.registerSolicitudIngreso.txtLastaName);
 		this.fields.add(this.registerSolicitudIngreso.txtSecondLastName);
-		this.fields.add(this.registerSolicitudIngreso.txtCurp);
 		this.fields.add(this.registerSolicitudIngreso.txtAge);
+		this.fields.add(this.registerSolicitudIngreso.txtCurp);
 		this.fields.add(this.registerSolicitudIngreso.txtAddress);
 		this.fields.add(this.registerSolicitudIngreso.txtBirthLocation);
 		this.fields.add(this.registerSolicitudIngreso.txtEmail);
