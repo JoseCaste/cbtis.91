@@ -192,7 +192,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 		panel.add(lblCorreoElectrnico);
 
 		txtEmail = new JTextField();
-		txtEmail.setName("required7");
+		txtEmail.setName("Correo electrónico");
 		txtEmail.setBounds(880, 24, 217, 19);
 		panel.add(txtEmail);
 		txtEmail.setColumns(10);
