@@ -74,6 +74,7 @@ public class PoiTest {
                 new File("/home/jose/Documents/GFGsheet.xlsx"));
 			workbook.write(out);
 			out.close();
+			workbook.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

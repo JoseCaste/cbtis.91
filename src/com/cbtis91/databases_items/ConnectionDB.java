@@ -18,10 +18,10 @@ public class ConnectionDB {
 	    private ConnectionDB(){
 	    	try {
 	            Class.forName("com.mysql.cj.jdbc.Driver");  
-	            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/servicios_escolares", "cbtis", "12345");
+	            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/servicios_escolares?useSSL=false&allowPublicKeyRetrieval=true", "cbtis", "12345");
 			} catch (Exception e) {
 				logger.log(Level.WARNING, "Error al conectar la base de datos {0}",e);
-				JOptionPane.showMessageDialog(null, "Error al conectar a la base de datos", "Error", 2);
+				JOptionPane.showMessageDialog(null, "Error al conectar a la base de datos"+e.toString(), "Error", 2);
 			}
 	    }
 	    

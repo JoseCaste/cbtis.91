@@ -24,9 +24,12 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JPopupMenu;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JMenuItem;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 @SuppressWarnings("rawtypes")
 public class RegisterSolicitudIngreso extends JFrame{
@@ -58,6 +61,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 	public JMenuItem mntmAgregarNota;
 	public JMenuItem mntmReinciarNmeroDe;
 	public JMenuItem mntmExportarFichas;
+	private JScrollPane jScrollPane;
 
 	/**
 	 * Launch the application.
@@ -82,7 +86,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 	public RegisterSolicitudIngreso() {
 		setTitle("CBTis91 Registro de Fichas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1158, 861);
+		setBounds(100, 100, 1139, 861);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaptionBorder);
@@ -93,8 +97,8 @@ public class RegisterSolicitudIngreso extends JFrame{
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Datos del alumno", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(12, 12, 1119, 812);
-		contentPane.add(panel);
+		panel.setBounds(12, 12, 1119, 	812);
+		//contentPane.add(panel);
 		panel.setLayout(null);
 
 		JLabel lblNombres = new JLabel("Nombres");
@@ -389,6 +393,23 @@ public class RegisterSolicitudIngreso extends JFrame{
 	    
 	    setJMenuBar(menuBar);
 	    
+	    jScrollPane= new JScrollPane();
+	    jScrollPane.setBounds(5, 10, getWidth(), getHeight());
+	    
+	    panel.setPreferredSize(new Dimension(1119, 800));
+	    jScrollPane.setViewportView(panel);
+	    getContentPane().add(jScrollPane);
+	    
+	    addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				jScrollPane.setBounds(5, 10, e.getComponent().getWidth()-25, e.getComponent().getHeight()-80);
+			}
+	    	@Override
+	    	public void componentShown(ComponentEvent e) {
+	    		System.out.println("Mostrado");
+	    	}
+		});
 		comboDiscapacidad.addActionListener(new ActionListener() {
 
 			@Override

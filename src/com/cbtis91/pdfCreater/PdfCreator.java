@@ -73,10 +73,12 @@ public class PdfCreator {
 		int numeroFicha=saveFicha();
 		try {
 			
-			File file = new File(String.format("/home/jose/Documents/PDFs/%s.pdf", this.curp));
+			//File file = new File(String.format("/home/jose/Documents/PDFs/%s.pdf", this.curp));
+			File file = new File(String.format("C:\\Users\\Centro de Computo\\Documents\\PDFs\\%s.pdf", this.curp));
 	        file.getParentFile().mkdirs();
 	        
-	        PdfWriter writer = new PdfWriter(String.format("/home/jose/Documents/PDFs/%s.pdf", this.curp));
+	        //PdfWriter writer = new PdfWriter(String.format("/home/jose/Documents/PDFs/%s.pdf", this.curp));
+	        PdfWriter writer = new PdfWriter(String.format("C:\\Users\\Centro de Computo\\Documents\\PDFs\\%s.pdf", this.curp));
 	        
 	        PdfDocument pdf = new PdfDocument(writer);
 	        

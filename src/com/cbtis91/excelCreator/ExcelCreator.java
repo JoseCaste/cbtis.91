@@ -8,10 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
-
 import javax.swing.JOptionPane;
-
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -92,8 +89,11 @@ public class ExcelCreator {
         try {
             // .xlsx is the format for Excel Sheets...
             // writing the workbook into the file...
-            FileOutputStream out = new FileOutputStream(
-                new File("/home/jose/Documents/reporte de fichas.xlsx"));
+            /*FileOutputStream out = new FileOutputStream(
+                new File("/home/jose/Documents/reporte de fichas.xlsx"));*/
+        	FileOutputStream out = new FileOutputStream(
+                    new File("C:\\Users\\Centro de Computo\\Documents\\Excel\\reporte de fichas.xlsx"));
+        	
 			workbook.write(out);
 			out.close();
 			return true;
@@ -102,6 +102,13 @@ public class ExcelCreator {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Error al generar el reporte de excel","Error",2);
 			return false;
+		}finally {
+			try {
+				workbook.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }
