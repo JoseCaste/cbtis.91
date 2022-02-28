@@ -134,7 +134,7 @@ public class SolicitudIngresoController implements ActionListener{
 						JOptionPane.showMessageDialog(null, "Reporte creado exitosamente");
 					else
 						
-						JOptionPane.showMessageDialog(null, "No se ha creado el reporte","Error",2);
+						JOptionPane.showMessageDialog(null, "No se ha creado el reporte o la ruta destino no existe","Error",2);
 				}
 			}
 		});
