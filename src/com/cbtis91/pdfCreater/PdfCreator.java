@@ -2,6 +2,8 @@ package com.cbtis91.pdfCreater;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,63 +72,67 @@ public class PdfCreator {
 		this.daoFicha= new DAOFicha();
 	}
 	public boolean createFicha(int actualYear) {
-		int numeroFicha=saveFicha();
-		try {
-			
-			//File file = new File(String.format("/home/jose/Documents/PDFs/%s.pdf", this.curp));
-			File file = new File(String.format("C:\\Users\\Centro de Computo\\Documents\\PDFs\\%s.pdf", this.curp));
-	        file.getParentFile().mkdirs();
-	        
-	        //PdfWriter writer = new PdfWriter(String.format("/home/jose/Documents/PDFs/%s.pdf", this.curp));
-	        PdfWriter writer = new PdfWriter(String.format("C:\\Users\\Centro de Computo\\Documents\\PDFs\\%s.pdf", this.curp));
-	        
-	        PdfDocument pdf = new PdfDocument(writer);
-	        
-	        Document document = new Document(pdf);
-
-	        loadPdf(document, numeroFicha, actualYear);
-	        
-	        document.add(new Paragraph(" "));
-	        document.add(new Paragraph(" "));
-	        document.add(new Paragraph(" "));
-	        document.add(new Paragraph(" "));
-	        
-	        loadPdf(document, numeroFicha, actualYear);
-	        /*document.add(new Paragraph("SECRETARIA DE EDUCACIÓN PÚBLICA").setTextAlignment(TextAlignment.CENTER).setFont(font).setFontSize(9).setFixedLeading(1));
-	        document.add(new Paragraph("SUBSECRETARÍA DE EDUCACIÓN MEDIA SUPERIOR").setTextAlignment(TextAlignment.CENTER).setFont(font).setFontSize(9));
-	        document.add(new Paragraph("DIRECCIÓN GENERAL DE EDUCACIÓN TECNOLÓGICA industrial y de servicios").setFont(font).setTextAlignment(TextAlignment.CENTER).setFontSize(9).setFixedLeading(1));
-	        document.add(new Paragraph("CENTRO DE BACHILLERATO TECNOLÓGICO industrial y de servicios No. 91").setFont(font).setTextAlignment(TextAlignment.CENTER).setFontSize(9));
-	        
-	        document.add(new Paragraph(" "));
-	        
-	        document.add(new Paragraph(String.format("FICHA DE INGRESO %d", actualYear)).setFont(font).setTextAlignment(TextAlignment.CENTER).setFontSize(9).setUnderline());
-
-	        document.add(new Paragraph(" "));
-	        
-	        document.add(new Paragraph(String.format("No. de FICHA: %d", numeroFicha)).setTextAlignment(TextAlignment.RIGHT).setFont(font).setFontSize(9));
-	        document.add(new Paragraph(" "));
-	        document.add(new Paragraph(" "));
-	        document.add(new Paragraph(" "));
-	        document.add(new Paragraph(" "));
-	        document.add(new Paragraph(String.format("NOMBRE DEL ALUMNO: %s %s %s", this.lastName,this.secondLastName,this.names)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        document.add(new Paragraph(String.format("CURP: %s", this.curp)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        document.add(new Paragraph(String.format("TELEFONO: %s", this.contact)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        document.add(new Paragraph(String.format("CORREO ELECTRÓNICO: %s", this.email)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        document.add(new Paragraph(String.format("LUGAR DE NACIEMIENTO: %s", this.birthPlace)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        document.add(new Paragraph(String.format("OPCION 1 DE ESPECIALIDAD : %s", this.op1Especilty)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        document.add(new Paragraph(String.format("OPCION 2 DE ESPECIALIDAD : %s", this.op2Especilty)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
-	        
-	        document.add(new Paragraph(" "));
-	        
-	        document.add(new Paragraph(String.format("NOTA: %s", this.optionalNote)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));*/
-	        
-	        document.close();
-			return true;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}		
+			try {
+				
+				//File file = new File(String.format("/home/jose/Documents/PDFs/%s.pdf", this.curp));
+				File file = new File(String.format("C:\\Users\\Centro de Computo\\Documents\\PDFs\\%s.pdf", this.curp));
+		        file.getParentFile().mkdirs();
+		        
+		        //PdfWriter writer = new PdfWriter(String.format("/home/jose/Documents/PDFs/%s.pdf", this.curp));
+		        PdfWriter writer = new PdfWriter(String.format("C:\\Users\\Centro de Computo\\Documents\\PDFs\\%s.pdf", this.curp));
+		        
+		        PdfDocument pdf = new PdfDocument(writer);
+		        
+		        Document document = new Document(pdf);
+		        
+		        int numeroFicha=saveFicha();
+		        
+		        loadPdf(document, numeroFicha, actualYear);
+		        
+		        document.add(new Paragraph(" "));
+		        document.add(new Paragraph(" "));
+		        document.add(new Paragraph(" "));
+		        document.add(new Paragraph(" "));
+		        
+		        loadPdf(document, numeroFicha, actualYear);
+		        /*document.add(new Paragraph("SECRETARIA DE EDUCACIÓN PÚBLICA").setTextAlignment(TextAlignment.CENTER).setFont(font).setFontSize(9).setFixedLeading(1));
+		        document.add(new Paragraph("SUBSECRETARÍA DE EDUCACIÓN MEDIA SUPERIOR").setTextAlignment(TextAlignment.CENTER).setFont(font).setFontSize(9));
+		        document.add(new Paragraph("DIRECCIÓN GENERAL DE EDUCACIÓN TECNOLÓGICA industrial y de servicios").setFont(font).setTextAlignment(TextAlignment.CENTER).setFontSize(9).setFixedLeading(1));
+		        document.add(new Paragraph("CENTRO DE BACHILLERATO TECNOLÓGICO industrial y de servicios No. 91").setFont(font).setTextAlignment(TextAlignment.CENTER).setFontSize(9));
+		        
+		        document.add(new Paragraph(" "));
+		        
+		        document.add(new Paragraph(String.format("FICHA DE INGRESO %d", actualYear)).setFont(font).setTextAlignment(TextAlignment.CENTER).setFontSize(9).setUnderline());
+	
+		        document.add(new Paragraph(" "));
+		        
+		        document.add(new Paragraph(String.format("No. de FICHA: %d", numeroFicha)).setTextAlignment(TextAlignment.RIGHT).setFont(font).setFontSize(9));
+		        document.add(new Paragraph(" "));
+		        document.add(new Paragraph(" "));
+		        document.add(new Paragraph(" "));
+		        document.add(new Paragraph(" "));
+		        document.add(new Paragraph(String.format("NOMBRE DEL ALUMNO: %s %s %s", this.lastName,this.secondLastName,this.names)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
+		        document.add(new Paragraph(String.format("CURP: %s", this.curp)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
+		        document.add(new Paragraph(String.format("TELEFONO: %s", this.contact)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
+		        document.add(new Paragraph(String.format("CORREO ELECTRÓNICO: %s", this.email)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
+		        document.add(new Paragraph(String.format("LUGAR DE NACIEMIENTO: %s", this.birthPlace)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
+		        document.add(new Paragraph(String.format("OPCION 1 DE ESPECIALIDAD : %s", this.op1Especilty)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
+		        document.add(new Paragraph(String.format("OPCION 2 DE ESPECIALIDAD : %s", this.op2Especilty)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));
+		        
+		        document.add(new Paragraph(" "));
+		        
+		        document.add(new Paragraph(String.format("NOTA: %s", this.optionalNote)).setTextAlignment(TextAlignment.JUSTIFIED).setFontSize(9).setPaddingLeft(48));*/
+		        
+		        document.close();
+				return true;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}catch (NullPointerException e) {
+				e.printStackTrace();
+				return false;
+			}
 	}
 	private void loadPdf(Document document, int numeroFicha, int actualYear) {
 		try {

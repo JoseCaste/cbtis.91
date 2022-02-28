@@ -285,7 +285,7 @@ public class SolicitudIngresoController implements ActionListener{
 						PdfCreator pdfCreator= new PdfCreator(names, lastName, secondLastname, age, curp, actualResidencia, address, birthPlace, op1, op2, email,contact, lenguaje, disability, kindSchool,optionalNote);
 
 						if(pdfCreator.createFicha(actualYear)) JOptionPane.showMessageDialog(null, "¡Ficha de "+lastName+" "+secondLastname+" "+names+" creado exitosamente!");
-						else JOptionPane.showMessageDialog(null, "Algo ocurrió en el proceso","Error",2);
+						else JOptionPane.showMessageDialog(null, "Algo ocurrió en el proceso o la carpeta destino no existe","Error",2);
 						
 					} catch (NumberFormatException exception) {
 						// TODO: handle exception
