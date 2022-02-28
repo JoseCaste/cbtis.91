@@ -30,6 +30,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JMenuItem;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.Toolkit;
 
 @SuppressWarnings("rawtypes")
 public class RegisterSolicitudIngreso extends JFrame{
@@ -84,6 +85,7 @@ public class RegisterSolicitudIngreso extends JFrame{
 	 */
 	@SuppressWarnings({ "unchecked" })
 	public RegisterSolicitudIngreso() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegisterSolicitudIngreso.class.getResource("/com/cbtis91/resources/logo_cbtis.jpg")));
 		setTitle("CBTis91 Registro de Fichas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1139, 861);
@@ -405,10 +407,6 @@ public class RegisterSolicitudIngreso extends JFrame{
 			public void componentResized(ComponentEvent e) {
 				jScrollPane.setBounds(5, 10, e.getComponent().getWidth()-25, e.getComponent().getHeight()-80);
 			}
-	    	@Override
-	    	public void componentShown(ComponentEvent e) {
-	    		System.out.println("Mostrado");
-	    	}
 		});
 		comboDiscapacidad.addActionListener(new ActionListener() {
 
